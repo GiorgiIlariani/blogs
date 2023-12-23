@@ -7,13 +7,16 @@ import { fetchCategories } from "@/lib/actions/fetchCategories";
 import FetchBlogsLoading from "@/components/loadings/fetchAllBlogsLoading";
 
 const HomePage = async () => {
+  const categories = await fetchCategories();
+  const { data } = await fetchBlogs();
+
   return (
     <div className="bg-[#F3F2FA] min-h-screen">
       <Header />
       <div className="w-full px-4">
         <Hero />
         <Suspense fallback={<FetchBlogsLoading />}>
-          <Blogs />
+          <Blogs blogs={data} categories={categories} />
         </Suspense>
       </div>
     </div>

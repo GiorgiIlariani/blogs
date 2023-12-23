@@ -1,3 +1,5 @@
+"use client";
+
 import { CategoryTypes } from "@/types";
 import React from "react";
 import Button from "../UI/Button";

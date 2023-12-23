@@ -10,6 +10,7 @@ import Modal from "./modal";
 const Header = () => {
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const [isAuthorizationSuccessful, setIsAuthorizationSuccessful] =
     useState(false);
 
