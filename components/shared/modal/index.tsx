@@ -6,7 +6,7 @@ import { Fragment, useState } from "react";
 import { ModalProps } from "@/types";
 import { useRouter } from "next/navigation";
 import Button from "@/components/UI/Button";
-import { authenticateUser } from "@/lib/authenticateUser";
+import { authenticateUser } from "@/lib/actions/authenticateUser";
 import SuccessContent from "./SuccessContent";
 import AuthorizationContent from "./AuthorizationContent";
 import FormSubmitedSuccessfullyContent from "./FormSubmitedSuccessfullyContent";

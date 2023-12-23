@@ -21,6 +21,9 @@ const config: Config = {
       lg: { max: "1080px" },
       // => @media (max-width: 1080px) { ... }
 
+      heroSection: { max: "900px" },
+      // => @media (max-width: 1080px) { ... }
+
       md: { max: "768px" },
       // => @media (max-width: 768px) { ... }
 

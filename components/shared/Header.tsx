@@ -26,7 +26,7 @@ const Header = () => {
   };
 
   return (
-    <div className="w-full h-20 px-[76px] py-7 flex justify-between items-center bg-[#FFFFFF]">
+    <div className="w-full h-20 px-[76px] lg:px-10 py-7 flex justify-between items-center bg-[#FFFFFF]">
       <Link href="/" className="cursor-pointer">
         <Image
           src="/assets/images/redberry.png"
