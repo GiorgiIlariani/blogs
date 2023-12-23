@@ -8,8 +8,7 @@ type BlogsListProps = {
 
 const BlogsList = ({ filteredBlogs }: BlogsListProps) => {
   return (
-    <div
-      className={`w-full flex flex-wrap items-start blogsSection:justify-center gap-8 max-w-[1288px] mx-auto py-[96px]`}>
+    <div className="w-full flex flex-wrap items-start blogsSection:justify-center gap-8 max-w-[1288px] mx-auto py-[96px]">
       {filteredBlogs.map((blog) => {
         const filteredCategoriesArr = blog.categories.map(
           (category) => category

@@ -3,7 +3,6 @@ import { BlogsTypes } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "../UI/Button";
-// import { Button } from "../ui/button";
 
 export interface EachBlogProps extends BlogsTypes {
   scrolable?: boolean;
