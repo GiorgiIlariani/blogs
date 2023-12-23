@@ -13,8 +13,6 @@ export const fetchEachBlog = async (id: number) => {
       throw new Error(`Failed to fetch blog details. Status: ${response.status}`);
     }
 
-    await new Promise((resolve) => setTimeout(resolve, 5000));
-
     const data = await response.json();
 
     return data;

@@ -48,7 +48,6 @@ const Header = () => {
           text="შესვლა"
           onClick={openModal}
           className="bg-[#5D37F3] text-light-1"
-          //   style={{ backgroundColor: "#5D37F3", color: "#FFFFFF" }}
         />
       )}
 

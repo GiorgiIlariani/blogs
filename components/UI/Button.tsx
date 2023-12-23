@@ -15,7 +15,7 @@ const Button: FC<ButtonProps> = ({
   className,
   style,
 }): ReactElement => {
-  const buttonClasses = `px-4 py-2 ${className}`;
+  const buttonClasses = `px-4 py-2 rounded-[8px]  ${className}`;
 
   return (
     <button

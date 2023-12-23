@@ -30,7 +30,7 @@ const BlogDetails: React.FC<BlogDetailsProps> = async ({
         alt={title}
         width={720}
         height={328}
-        className="h-[328px] w-[720px] object-cover rounded-[12px]"
+        className="h-[328px] xs:h-[250px] w-[720px] object-cover rounded-[12px]"
       />
       <div className="flex flex-col gap-6 mt-10 sm:mt-6">
         <div className="flex flex-col gap-3">
