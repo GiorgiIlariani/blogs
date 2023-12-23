@@ -1,27 +1,22 @@
-import React, { FC, ReactElement, CSSProperties } from "react";
+import React, { FC, ReactElement } from "react";
 
 interface ButtonProps {
   onClick?: () => void;
   type?: "button" | "submit" | "reset";
   text: string;
-  style?: CSSProperties;
+  className?: string;
 }
 
 const Button: FC<ButtonProps> = ({
   onClick,
   type = "button",
   text,
-  style,
+  className,
 }): ReactElement => {
-  const buttonStyles: CSSProperties = {
-    padding: "10px 15px",
-    borderRadius: "5px",
-    cursor: "pointer",
-    ...style,
-  };
+  const buttonClasses = `px-4 py-2 rounded cursor-pointer ${className}`;
 
   return (
-    <button onClick={onClick} type={type} style={buttonStyles}>
+    <button onClick={onClick} type={type} className={buttonClasses}>
       {text}
     </button>
   );
