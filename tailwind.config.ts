@@ -8,10 +8,30 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      colors: {
+         "light-1": "#FFFFFF",
+      },
+      screens: {
+      "2xl": { max: "1536px" },
+      // => @media (max-width: 1536px) { ... }
+
+      xl: { max: "1280px" },
+      // => @media (max-width: 1280px) { ... }
+
+      lg: { max: "1080px" },
+      // => @media (max-width: 1080px) { ... }
+
+      md: { max: "768px" },
+      // => @media (max-width: 768px) { ... }
+
+      sm: { max: "640px" },
+      // => @media (max-width: 640px) { ... }
+
+      xs: { max: "500px" },
+      // => @media (max-width: 5000px) { ... }
+
+      "2xs": { max: "390px" },
+      // => @media (max-width: 390px) { ... }
       },
     },
   },
