@@ -1,14 +1,14 @@
 "use client";
 
-import useSmoothHorizontalScroll from "@/hooks/useSmoothHorizontalScroll";
-import { EachBlogProps } from "@/types";
 import React from "react";
+import useSmoothHorizontalScroll from "@/hooks/useSmoothHorizontalScroll";
 import EachBlog from "./EachBlog";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import { BlogsTypes } from "@/types";
 
 interface SimilarBlogsProps {
-  similarBlogs: EachBlogProps[];
+  similarBlogs: BlogsTypes[];
 }
 
 const SimilarBlogs = ({ similarBlogs }: SimilarBlogsProps) => {
@@ -16,7 +16,7 @@ const SimilarBlogs = ({ similarBlogs }: SimilarBlogsProps) => {
     useSmoothHorizontalScroll();
 
   return (
-    <div className="w-full mt-20 max-w-[1288px] mx-auto min-h-screen">
+    <div className="w-full mt-20 max-w-[1288px] mx-auto px-6 sm:px-4 2xs:px-2">
       <div className="flex items-center justify-between">
         <h2 className="font-bold text-[32px]">მსგავსი სტატიები</h2>
         <div className="flex items-center gap-x-4">
@@ -40,7 +40,7 @@ const SimilarBlogs = ({ similarBlogs }: SimilarBlogsProps) => {
         className="w-full flex gap-8 mt-10 items-center overflow-auto no-scrollbar"
         ref={scrollContainerRef as React.RefObject<HTMLDivElement>}
         onScroll={handleScroll}>
-        {similarBlogs.slice(0, 4).map((blog) => (
+        {similarBlogs.map((blog) => (
           <EachBlog
             key={blog.id}
             id={blog.id}

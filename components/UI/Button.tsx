@@ -15,7 +15,7 @@ const Button: FC<ButtonProps> = ({
   className,
   style,
 }): ReactElement => {
-  const buttonClasses = `px-4 py-2 rounded cursor-pointer ${className}`;
+  const buttonClasses = `px-4 py-2 ${className}`;
 
   return (
     <button

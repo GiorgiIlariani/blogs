@@ -1,11 +1,10 @@
 import React from "react";
-import Image from "next/image";
-import Button from "@/components/UI/Button";
 import SimilarBlogs from "@/components/blogs/SimilarBlogs";
 import Header from "@/components/shared/Header";
 import { fetchBlogs } from "@/lib/actions/fetchBlogs";
 import { fetchEachBlog } from "@/lib/actions/fetchEachBlog";
 import { BlogsTypes, CategoryTypes } from "@/types";
+import BlogDetails from "@/components/blogs/BlogDetails";
 
 const Page = async ({ params }: { params: { id: string } }) => {
   const blogDetails = await fetchEachBlog(Number(params.id));
@@ -24,45 +23,19 @@ const Page = async ({ params }: { params: { id: string } }) => {
   );
 
   return (
-    <div className="bg-[#F3F2FA]">
-      <Header />
-      <div className="max-w-[720px] mx-auto flex flex-col my-10">
-        <Image
-          src={image}
-          alt={title}
-          width={720}
-          height={328}
-          className="h-[328px] w-[720px] object-cover rounded-[12px]"
+    <div className="bg-[#F3F2FA] pb-10">
+      <div className="max-w-[720px] mx-auto flex flex-col my-10 px-6 sm:px-4 2xs:px-2">
+        <BlogDetails
+          title={title}
+          description={description}
+          image={image}
+          publish_date={publish_date}
+          categories={categories}
+          author={author}
+          email={email}
         />
-        <div className="flex flex-col gap-6 mt-10">
-          <div className="flex flex-col gap-3">
-            <h4 className="text-base font-medium">{author}</h4>
-            <div className="text-[#85858D] flex items-center gap-2">
-              <p>{publish_date}</p>
-              <span>•</span>
-              <p>{email}</p>
-            </div>
-            <h1 className="font-bold text-[40px]">{title}</h1>
-            <div className="w-full flex items-center flex-wrap gap-2">
-              {categories.map((category: CategoryTypes) => (
-                <Button
-                  key={category.id}
-                  className="rounded-[30px]"
-                  style={{
-                    color: category.text_color,
-                    backgroundColor: category.background_color,
-                  }}
-                  text={category.title}
-                />
-              ))}
-            </div>
-          </div>
-          <div>
-            <p className="text-[#404049]">{description}</p>
-          </div>
-        </div>
       </div>
-      <SimilarBlogs similarBlogs={filteredSimilarBlogs} />
+      {/* <SimilarBlogs similarBlogs={filteredSimilarBlogs} /> */}
     </div>
   );
 };
