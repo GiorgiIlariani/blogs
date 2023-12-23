@@ -30,7 +30,7 @@ const Blogs = ({ blogs, categories }: BlogsProps) => {
         selectedCategories={selectedCategories}
         setSelectedCategories={setSelectedCategories}
       />
-      {/* <BlogsList filteredBlogs={filteredBlogs} /> */}
+      <BlogsList filteredBlogs={filteredBlogs} />
     </>
   );
 };

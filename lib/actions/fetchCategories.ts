@@ -1,10 +1,11 @@
 export const fetchCategories = async () => {
+  const token = '59b997d3c0d701d70d3f7aaf05a79698f07ac3cab638ee76504ec60ecfad9797';
   try {
     const response = await fetch(
       "https://api.blog.redberryinternship.ge/api/categories",
       {
         headers: {
-          Authorization: `Bearer 9bb9745823102147085b39aed78e4580ecb0518ffcc8a0ec0c29a1b09abc8b61`,
+          Authorization: `Bearer ${token}`,
         },
       }
     );

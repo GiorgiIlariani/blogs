@@ -1,5 +1,5 @@
 export const authenticateUser = async (email: string) => {
-  const token = '9bb9745823102147085b39aed78e4580ecb0518ffcc8a0ec0c29a1b09abc8b61';
+  const token = '59b997d3c0d701d70d3f7aaf05a79698f07ac3cab638ee76504ec60ecfad9797';
   
   try {
     const response = await fetch(

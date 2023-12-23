@@ -15,6 +15,9 @@ const config: Config = {
       "2xl": { max: "1536px" },
       // => @media (max-width: 1536px) { ... }
 
+      blogsSection: { max: '1340px' },
+      // => @media (max-width: 1340px) { ... }
+
       xl: { max: "1280px" },
       // => @media (max-width: 1280px) { ... }
 
