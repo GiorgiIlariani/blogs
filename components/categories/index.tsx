@@ -1,43 +1,46 @@
 "use client";
 
 import { CategoryTypes } from "@/types";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../UI/Button";
+import { useRouter } from "next/navigation";
 
 type CategoriesProps = {
   categories: CategoryTypes[];
-  selectedCategories: number[];
-  setSelectedCategories: React.Dispatch<React.SetStateAction<number[]>>;
 };
 
-const CategoriesList: React.FC<CategoriesProps> = ({
-  categories,
-  selectedCategories,
-  setSelectedCategories,
-}) => {
-  const handleCategoryClick = (index: number) => {
-    // Calculate the value to be added to the selectedCategories array
+const CategoriesList: React.FC<CategoriesProps> = ({ categories }) => {
+  const router = useRouter();
+
+  const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
+  const [categoryTitles, setCategoryTitles] = useState<string[]>([]);
+
+  const handleCategoryClick = (index: number, title: string) => {
     const valueToAdd = index + 1;
 
-    // Check if the category is already selected
-    const isSelected = selectedCategories.includes(valueToAdd);
-
-    // If selected, remove from the array; otherwise, add to the array
-    setSelectedCategories((prevSelectedCategories) =>
-      isSelected
-        ? prevSelectedCategories.filter(
-            (selectedIndex) => selectedIndex !== valueToAdd
-          )
-        : [...prevSelectedCategories, valueToAdd]
+    setSelectedCategories((prev) =>
+      prev.includes(valueToAdd)
+        ? prev.filter((selectedIndex) => selectedIndex !== valueToAdd)
+        : [...prev, valueToAdd]
+    );
+    setCategoryTitles((prev) =>
+      prev.includes(title)
+        ? prev.filter((selectedTitle) => selectedTitle !== title)
+        : [...prev, title]
     );
   };
+
+  useEffect(() => {
+    const categoriesString = categoryTitles.join("&");
+    router.push(`/?${categoriesString}`);
+  }, [selectedCategories]);
 
   return (
     <div className="max-w-[684px] mx-auto flex items-center gap-[10px] flex-wrap">
       {categories.map(({ title, text_color, id, background_color }, index) => (
         <Button
           key={id}
-          onClick={() => handleCategoryClick(index)}
+          onClick={() => handleCategoryClick(index, title)}
           text={title}
           style={{
             color: text_color,

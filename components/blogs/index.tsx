@@ -1,34 +1,28 @@
-"use client";
-
-import CategoriesList from "../categories";
 import { BlogsTypes, CategoryTypes } from "@/types";
 import BlogsList from "./BlogsList";
-import { useState } from "react";
+import { fetchBlogs } from "@/lib/actions/fetchBlogs";
+
 type BlogsProps = {
-  blogs: BlogsTypes[];
-  categories: CategoryTypes[];
+  selectedCategories: string[];
 };
 
-const Blogs: React.FC<BlogsProps> = async ({ blogs, categories }) => {
-  const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
+const Blogs: React.FC<BlogsProps> = async ({ selectedCategories }) => {
+  const { data } = await fetchBlogs();
 
   const filteredBlogs =
     selectedCategories.length === 0
-      ? blogs.filter((blog) => new Date(blog.publish_date) <= new Date()) // Add this condition
-      : blogs.filter(
-          (blog) =>
+      ? data.filter(
+          (blog: BlogsTypes) => new Date(blog.publish_date) <= new Date()
+        ) // Add this condition
+      : data.filter(
+          (blog: BlogsTypes) =>
             blog.categories.some((category) =>
-              selectedCategories.includes(category.id)
+              selectedCategories.includes(category.title)
             ) && new Date(blog.publish_date) <= new Date() // Add this condition
         );
 
   return (
     <>
-      <CategoriesList
-        selectedCategories={selectedCategories}
-        setSelectedCategories={setSelectedCategories}
-        categories={categories}
-      />
       <BlogsList filteredBlogs={filteredBlogs} />
     </>
   );

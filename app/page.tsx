@@ -5,22 +5,28 @@ import Hero from "@/components/shared/Hero";
 import { fetchBlogs } from "@/lib/actions/fetchBlogs";
 import { fetchCategories } from "@/lib/actions/fetchCategories";
 import FetchBlogsLoading from "@/components/loadings/fetchAllBlogsLoading";
+import CategoriesList from "@/components/categories";
 
-const HomePage = async () => {
+async function HomePage({
+  searchParams,
+}: {
+  searchParams?: Record<string, string>;
+}) {
   const categories = await fetchCategories();
-  const { data } = await fetchBlogs();
+  const selectedCategories = Object.keys(searchParams || {});
 
   return (
     <div className="bg-[#F3F2FA] min-h-screen">
       <Header />
       <div className="w-full px-4">
         <Hero />
+        <CategoriesList categories={categories} />
         <Suspense fallback={<FetchBlogsLoading />}>
-          <Blogs blogs={data} categories={categories} />
+          <Blogs selectedCategories={selectedCategories} />
         </Suspense>
       </div>
     </div>
   );
-};
+}
 
 export default HomePage;
