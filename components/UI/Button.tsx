@@ -6,6 +6,7 @@ interface ButtonProps {
   text: string;
   className?: string;
   style?: CSSProperties;
+  disabled?: boolean;
 }
 
 const Button: FC<ButtonProps> = ({
@@ -14,6 +15,7 @@ const Button: FC<ButtonProps> = ({
   text,
   className,
   style,
+  disabled,
 }): ReactElement => {
   const buttonClasses = `px-4 py-2 rounded-[8px]  ${className}`;
 
@@ -22,7 +24,8 @@ const Button: FC<ButtonProps> = ({
       onClick={onClick}
       type={type}
       className={buttonClasses}
-      style={style}>
+      style={style}
+      disabled={disabled}>
       {text}
     </button>
   );

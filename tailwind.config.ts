@@ -10,6 +10,8 @@ const config: Config = {
     extend: {
       colors: {
          "light-1": "#FFFFFF",
+         "success": '#14D81C',
+         'warning': '#EA1919'
       },
       screens: {
       "2xl": { max: "1536px" },

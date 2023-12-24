@@ -25,3 +25,39 @@ export type BlogsTypes = {
     author: string;
     categories: CategoryTypes[];
 }
+
+export type FormikValues = {
+    image: string;
+    author: string;
+    title: string;
+    description: string;
+    publish_date: string;
+    categories: number[];
+    email: string;
+}
+
+export type FormControlProps = {
+  control: "input" | "textarea" | "select" | 'date';
+  name: string;
+  label: string;
+  placeholder?: string;
+  info?: string[] | string;
+  minRows?: number;
+  setFieldValue?: Function;
+  categories?: CategoryTypes[];
+}
+
+export type DatePickerProps =  {
+  name: string;
+  label: string;
+  setFieldValue?: Function;
+  info?: string | string[] | undefined;
+}
+
+export type InputProps = {
+  name: string;
+  label: string;
+  placeholder?: string;
+  info?: string[] | string;
+  minRows?: number;
+}
