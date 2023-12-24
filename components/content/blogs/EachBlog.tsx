@@ -40,7 +40,7 @@ const EachBlog = ({
             <Button
               type="button"
               key={category.id}
-              className="rounded-[30px] whitespace-nowrap"
+              className="rounded-[30px] whitespace-nowrap cursor-default"
               style={{
                 color: category.text_color,
                 backgroundColor: category.background_color,
