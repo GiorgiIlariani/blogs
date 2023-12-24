@@ -41,6 +41,7 @@ const Header = () => {
             type="button"
             text="გამოსვლა"
             className="bg-[#5D37F3] text-light-1"
+            // onClick={handleLogout}
           />
         </div>
       ) : (

@@ -2,7 +2,7 @@ import { fetchEachBlog } from "@/lib/actions/fetchEachBlog";
 import { CategoryTypes } from "@/types";
 import Image from "next/image";
 import React from "react";
-import Button from "../UI/Button";
+import Button from "../../UI/Button";
 
 type BlogDetailsProps = {
   title: string;
