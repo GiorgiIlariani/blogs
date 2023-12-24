@@ -8,7 +8,7 @@ const HomePage = async () => {
   const categories = await fetchCategories();
 
   return (
-    <div className="bg-[#F3F2FA] min-h-screen">
+    <div className="min-h-screen">
       <Header />
       <div className="w-full px-4">
         <Hero />

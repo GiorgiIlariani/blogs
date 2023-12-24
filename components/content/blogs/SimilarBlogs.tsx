@@ -65,6 +65,7 @@ const SimilarBlogs = ({ similarBlogs }: SimilarBlogsProps) => {
           },
           0: {
             slidesPerView: 1,
+            spaceBetween: 20,
           },
         }}>
         {similarBlogs.map((blog) => (

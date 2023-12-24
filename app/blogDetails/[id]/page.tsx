@@ -22,7 +22,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
   );
 
   return (
-    <div className="bg-[#F3F2FA] pb-10">
+    <div className="pb-10">
       <div className="max-w-[720px] mx-auto flex flex-col my-10 px-6 sm:px-2">
         <BlogDetails
           title={title}
