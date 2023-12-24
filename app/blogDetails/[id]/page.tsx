@@ -34,7 +34,9 @@ const Page = async ({ params }: { params: { id: string } }) => {
           email={email}
         />
       </div>
-      <SimilarBlogs similarBlogs={filteredSimilarBlogs} />
+      <div className="w-full px-4">
+        <SimilarBlogs similarBlogs={filteredSimilarBlogs} />
+      </div>
     </div>
   );
 };

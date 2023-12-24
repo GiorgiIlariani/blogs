@@ -16,20 +16,17 @@ const EachBlog = ({
   title,
   categories,
   description,
-  scrolable = false,
+  scrolable,
 }: EachBlogProps) => {
   return (
-    <div
-      className={`max-w-[408px] flex flex-col gap-4 my-4 ${
-        scrolable ? "w-[calc(33.33%-14px)] flex-shrink-0" : ""
-      }`}>
+    <div className="max-w-[408px] flex flex-col gap-4 my-4">
       <Link href={`/blogDetails/${id}`} className="cursor-pointer">
         <Image
           src={image}
           alt="test img"
           width={408}
           height={328}
-          className="object-cover w-[408px] h-[328px] rounded-[12px]"
+          className="object-cover w-[408px] h-[328px] xs:h-[270px] rounded-[12px]"
         />
       </Link>
       <div className="w-full flex flex-col gap-4 justify-between">
@@ -38,7 +35,7 @@ const EachBlog = ({
           <p className="text-xs text-[#85858D]">{publish_date}</p>
         </div>
         <h3 className="text-xl xs:text-lg font-semibold h-14">{title}</h3>
-        <div className="w-full flex items-center gap-4 overflow-x-auto no-scrollbar">
+        <div className="w-full flex items-center gap-4 flex-wrap">
           {categories.map((category) => (
             <Button
               type="button"
