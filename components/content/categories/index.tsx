@@ -32,7 +32,7 @@ const CategoriesList = ({
   };
 
   return (
-    <div className="max-w-[684px] mx-auto flex items-center gap-[10px] flex-wrap">
+    <div className="max-w-[684px] mx-auto flex items-center justify-center gap-[10px] flex-wrap">
       {categories.map(({ title, text_color, id, background_color }, index) => (
         <Button
           key={id}
