@@ -13,20 +13,11 @@ const Header = () => {
   const [isAuthorizationSuccessful, setIsAuthorizationSuccessful] =
     useState(false);
 
-  const [isAuthorized, setIsAuthorized] = useState(
-    Boolean(sessionStorage.getItem("isAuthorized")) || false
-  );
-
   const handleAddBlog = () => router.push("/addBlog");
 
   const openModal = () => setIsModalOpen(true);
 
   const closeModal = () => setIsModalOpen(false);
-
-  const handleLogout = () => {
-    sessionStorage.removeItem("isAuthorized");
-    setIsAuthorized(false);
-  };
 
   return (
     <div className="w-full h-20 px-[76px] lg:px-10 py-7 flex justify-between items-center bg-[#FFFFFF]">
@@ -38,7 +29,7 @@ const Header = () => {
           height={24}
         />
       </Link>
-      {isAuthorized ? (
+      {isAuthorizationSuccessful ? (
         <div className="flex gap-2 items-center">
           <Button
             type="button"
@@ -50,7 +41,6 @@ const Header = () => {
             type="button"
             text="გამოსვლა"
             className="bg-[#5D37F3] text-light-1"
-            onClick={handleLogout}
           />
         </div>
       ) : (
@@ -67,7 +57,6 @@ const Header = () => {
         closeModal={closeModal}
         isAuthorizationSuccessful={isAuthorizationSuccessful}
         setIsAuthorizationSuccessful={setIsAuthorizationSuccessful}
-        setIsAuthorized={setIsAuthorized}
       />
     </div>
   );

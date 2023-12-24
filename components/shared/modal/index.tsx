@@ -18,7 +18,6 @@ export default function Modal({
   isAuthorizationSuccessful,
   setIsAuthorizationSuccessful,
   blogAddedSuccessfully,
-  setIsAuthorized,
 }: ModalProps) {
   const router = useRouter();
   const [value, setValue] = useState("");
@@ -44,9 +43,6 @@ export default function Modal({
     if (isValidEmail) {
       const isAuthorized = await authenticateUser(value);
       setIsAuthorizationSuccessful!(isAuthorized);
-      if (typeof window !== "undefined" && window.localStorage)
-        sessionStorage.setItem("isAuthorized", "true");
-      setIsAuthorized!(true);
     }
   };
 
