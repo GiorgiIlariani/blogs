@@ -11,7 +11,9 @@ const Header = () => {
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAuthorizationSuccessful, setIsAuthorizationSuccessful] = useState(
-    Boolean(sessionStorage.getItem("isAuthorized")) || false
+    Boolean(
+      typeof window !== "undefined" && sessionStorage.getItem("isAuthorized")
+    ) || false
   );
 
   const handleAddBlog = () => router.push("/addBlog");
@@ -21,7 +23,7 @@ const Header = () => {
   const closeModal = () => setIsModalOpen(false);
 
   const handleLogout = () => {
-    sessionStorage.removeItem("isAuthorized");
+    typeof window !== "undefined" && sessionStorage.removeItem("isAuthorized");
     setIsAuthorizationSuccessful(false);
   };
 
