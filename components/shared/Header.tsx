@@ -10,14 +10,20 @@ import Modal from "./modal";
 const Header = () => {
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isAuthorizationSuccessful, setIsAuthorizationSuccessful] =
-    useState(false);
+  const [isAuthorizationSuccessful, setIsAuthorizationSuccessful] = useState(
+    Boolean(sessionStorage.getItem("isAuthorized")) || false
+  );
 
   const handleAddBlog = () => router.push("/addBlog");
 
   const openModal = () => setIsModalOpen(true);
 
   const closeModal = () => setIsModalOpen(false);
+
+  const handleLogout = () => {
+    sessionStorage.removeItem("isAuthorized");
+    setIsAuthorizationSuccessful(false);
+  };
 
   return (
     <div className="w-full h-20 px-[76px] lg:px-10 py-7 flex justify-between items-center bg-[#FFFFFF]">
@@ -41,7 +47,7 @@ const Header = () => {
             type="button"
             text="გამოსვლა"
             className="bg-[#5D37F3] text-light-1"
-            // onClick={handleLogout}
+            onClick={handleLogout}
           />
         </div>
       ) : (

@@ -1,5 +1,5 @@
 import React from "react";
-import Blogs from "@/components/content";
+import Content from "@/components/content";
 import Header from "@/components/shared/Header";
 import Hero from "@/components/shared/Hero";
 import { fetchCategories } from "@/lib/actions/fetchCategories";
@@ -12,7 +12,7 @@ const HomePage = async () => {
       <Header />
       <div className="w-full px-4">
         <Hero />
-        <Blogs categories={categories} />
+        <Content categories={categories} />
       </div>
     </div>
   );
