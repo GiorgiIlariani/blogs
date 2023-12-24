@@ -6,6 +6,7 @@ export type ModalProps = {
     setIsAuthorizationSuccessful?: Dispatch<SetStateAction<boolean>>;
     isAuthorizationSuccessful?: boolean;
     blogAddedSuccessfully?: boolean;
+    setIsAuthorized?: Dispatch<SetStateAction<boolean>>;
 }
 
 export type CategoryTypes = {

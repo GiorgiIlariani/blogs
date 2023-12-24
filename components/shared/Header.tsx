@@ -10,20 +10,22 @@ import Modal from "./modal";
 const Header = () => {
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const [isAuthorizationSuccessful, setIsAuthorizationSuccessful] =
     useState(false);
 
-  const handleAddBlog = () => {
-    router.push("/addBlog");
-  };
+  const [isAuthorized, setIsAuthorized] = useState(
+    Boolean(sessionStorage.getItem("isAuthorized")) || false
+  );
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
+  const handleAddBlog = () => router.push("/addBlog");
 
-  const closeModal = () => {
-    setIsModalOpen(false);
+  const openModal = () => setIsModalOpen(true);
+
+  const closeModal = () => setIsModalOpen(false);
+
+  const handleLogout = () => {
+    sessionStorage.removeItem("isAuthorized");
+    setIsAuthorized(false);
   };
 
   return (
@@ -36,13 +38,21 @@ const Header = () => {
           height={24}
         />
       </Link>
-      {isAuthorizationSuccessful ? (
-        <Button
-          type="button"
-          text="დაამატე ბლოგი"
-          className="bg-[#5D37F3] text-light-1"
-          onClick={handleAddBlog}
-        />
+      {isAuthorized ? (
+        <div className="flex gap-2 items-center">
+          <Button
+            type="button"
+            text="დაამატე ბლოგი"
+            className="bg-[#5D37F3] text-light-1"
+            onClick={handleAddBlog}
+          />
+          <Button
+            type="button"
+            text="გამოსვლა"
+            className="bg-[#5D37F3] text-light-1"
+            onClick={handleLogout}
+          />
+        </div>
       ) : (
         <Button
           type="button"
@@ -57,6 +67,7 @@ const Header = () => {
         closeModal={closeModal}
         isAuthorizationSuccessful={isAuthorizationSuccessful}
         setIsAuthorizationSuccessful={setIsAuthorizationSuccessful}
+        setIsAuthorized={setIsAuthorized}
       />
     </div>
   );

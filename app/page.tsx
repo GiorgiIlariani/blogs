@@ -2,7 +2,6 @@ import React, { Suspense } from "react";
 import Blogs from "@/components/blogs";
 import Header from "@/components/shared/Header";
 import Hero from "@/components/shared/Hero";
-import { fetchBlogs } from "@/lib/actions/fetchBlogs";
 import { fetchCategories } from "@/lib/actions/fetchCategories";
 import FetchBlogsLoading from "@/components/loadings/fetchAllBlogsLoading";
 import CategoriesList from "@/components/categories";
