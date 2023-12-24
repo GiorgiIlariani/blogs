@@ -43,7 +43,8 @@ export default function Modal({
     if (isValidEmail) {
       const isAuthorized = await authenticateUser(value);
       setIsAuthorizationSuccessful!(isAuthorized);
-      sessionStorage.setItem("isAuthorized", "true");
+      typeof window !== "undefined" &&
+        sessionStorage.setItem("isAuthorized", "true");
     }
   };
 
