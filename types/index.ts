@@ -32,7 +32,7 @@ export type FormikValues = {
     title: string;
     description: string;
     publish_date: string;
-    categories: number[];
+    categories: CategoryTypes[];
     email: string;
 }
 
@@ -44,7 +44,6 @@ export type FormControlProps = {
   info?: string[] | string;
   minRows?: number;
   setFieldValue?: Function;
-  value?: any;
 }
 
 export type DatePickerProps =  {
@@ -60,7 +59,6 @@ export type InputProps = {
   placeholder?: string;
   info?: string[] | string;
   minRows?: number;
-  value?: any;
 }
 
 export type  SelectComponentProps = {
@@ -68,4 +66,12 @@ export type  SelectComponentProps = {
   label: string;
   placeholder?: string;
   setFieldValue?: Function;
+}
+
+export type ImageComponentProps = {
+  imageTouched: any;
+  handleFileSelect: any;
+  setFieldValue: any;
+  handleImageRemove: any;
+  name: any;
 }

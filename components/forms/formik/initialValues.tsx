@@ -1,9 +1,20 @@
 export const initialValues = {
-  image: "",
-  author: "",
-  title: "",
-  description: "",
-  publish_date: "",
-  categories: [],
-  email: "",
+  image: (typeof window !== "undefined" &&
+    JSON.parse(sessionStorage.getItem("image")!)) || { name: "", url: "" },
+  author:
+    (typeof window !== "undefined" && sessionStorage.getItem("author")) || "",
+  title:
+    (typeof window !== "undefined" && sessionStorage.getItem("title")) || "",
+  description:
+    (typeof window !== "undefined" && sessionStorage.getItem("description")) ||
+    "",
+  publish_date:
+    (typeof window !== "undefined" && sessionStorage.getItem("publish_date")) ||
+    "",
+  categories:
+    (typeof window !== "undefined" &&
+      JSON.parse(sessionStorage.getItem("categories")!)) ||
+    [],
+  email:
+    (typeof window !== "undefined" && sessionStorage.getItem("email")) || "",
 };

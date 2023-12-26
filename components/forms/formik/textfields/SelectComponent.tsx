@@ -13,12 +13,18 @@ const SelectComponent = (props: SelectComponentProps) => {
   const [field] = useField(name);
   const [categories, setCategories] = useState<CategoryTypes[]>([]);
   const [selectedCategories, setSelectedCategories] = useState<CategoryTypes[]>(
-    []
+    (typeof window !== "undefined" &&
+      JSON.parse(sessionStorage.getItem(name)!)) ||
+      []
   );
   const [showOptions, setShowOptions] = useState(false);
   const [isTouched, setIsTouched] = useState(false);
   const [isCategoryRemoved, setIsCategoryRemoved] = useState(false);
   const mainDivRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    sessionStorage.setItem(name, JSON.stringify(selectedCategories));
+  }, [selectedCategories, name]);
 
   useEffect(() => {
     const fetchAllCategories = async () => {
@@ -90,7 +96,7 @@ const SelectComponent = (props: SelectComponentProps) => {
   const isValid = selectedCategories.length > 0;
 
   return (
-    <div className="flex flex-col gap-[10px] w-[288px] relative">
+    <div className="flex flex-col gap-[10px] w-full relative">
       <h3 className="font-semibold text-base">{label}</h3>
       <div
         className={`w-full h-[44px] rounded-[12px] flex items-center gap-2 overflow-x-hidden overflow-y-hidden text-xs relative px-[10px] cursor-pointer border

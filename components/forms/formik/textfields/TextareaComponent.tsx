@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ErrorMessage, useField } from "formik";
 
 const TextareaComponent = (props: any) => {
@@ -9,6 +9,10 @@ const TextareaComponent = (props: any) => {
   const hasError =
     (meta.touched && Boolean(meta.error)) ||
     (field.value.length > 0 && field.value.length < 4);
+
+  useEffect(() => {
+    sessionStorage.setItem(name, field.value);
+  }, [field.value, name]);
 
   return (
     <>

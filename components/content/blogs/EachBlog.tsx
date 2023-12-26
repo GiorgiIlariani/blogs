@@ -4,10 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import Button from "../../UI/Button";
 
-export interface EachBlogProps extends BlogsTypes {
-  scrolable?: boolean;
-}
-
 const EachBlog = ({
   id,
   image,
@@ -16,8 +12,7 @@ const EachBlog = ({
   title,
   categories,
   description,
-  scrolable,
-}: EachBlogProps) => {
+}: BlogsTypes) => {
   return (
     <div className="max-w-[408px] flex flex-col gap-4 my-4">
       <Link href={`/blogDetails/${id}`} className="cursor-pointer">
@@ -34,7 +29,10 @@ const EachBlog = ({
           <h4 className="text-base font-semibold">{author}</h4>
           <p className="text-xs text-[#85858D]">{publish_date}</p>
         </div>
-        <h3 className="text-xl xs:text-lg font-semibold h-14">{title}</h3>
+        <h3 className="text-xl xs:text-lg font-semibold h-14">{`${title.slice(
+          0,
+          50
+        )}...`}</h3>
         <div className="w-full flex items-center gap-4 flex-wrap">
           {categories.map((category) => (
             <Button

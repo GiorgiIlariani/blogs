@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 function renderInfo(
   info: string | string[] | undefined,
@@ -80,10 +80,8 @@ import Image from "next/image";
 import { InputProps } from "@/types";
 
 const InputComponent: React.FC<InputProps> = (props) => {
-  const { label, name, placeholder, info, value } = props;
+  const { label, name, placeholder, info } = props;
   const [field, meta] = useField(name);
-
-  console.log({ value });
 
   const hasError =
     (meta.touched && Boolean(meta.error)) ||
@@ -94,6 +92,10 @@ const InputComponent: React.FC<InputProps> = (props) => {
   const hasEmailError =
     (field.value !== "" && !isValidEmail) || (meta.error && meta.touched);
 
+  useEffect(() => {
+    sessionStorage.setItem(name, field.value);
+  }, [field.value, name]);
+
   return (
     <>
       <label htmlFor={name} className="font-semibold">
@@ -101,9 +103,7 @@ const InputComponent: React.FC<InputProps> = (props) => {
       </label>
       <input
         id={name}
-        onChange={field.onChange}
-        onBlur={field.onBlur}
-        value={value}
+        {...field}
         type="input"
         placeholder={placeholder}
         className={`rounded-[12px] mt-[10px] bg-[#FFFFFF] w-full px-4 py-[10px] border-[2px] focus:border-[#5D37F3] outline-none ${

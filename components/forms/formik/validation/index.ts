@@ -26,7 +26,10 @@ export const validationSchema = Yup.object().shape({
   title: Yup.string()
     .matches(patterns.title, "მინიმუმ 4 სიმბოლო")
     .required("მინიმუმ 4 სიმბოლო"),
-  image: Yup.string().required("გთხოვთ ატვირთოთ თქვენი ფოტო!"),
+  image: Yup.object().shape({
+    name: Yup.string().required('Image name is required'),
+    url: Yup.object().required('Image URL is required'),
+  }).required("გთხოვთ ატვირთოთ თქვენი ფოტო!"),
   email: Yup.string().test(
       "is-valid-email",
       "Invalid email address",
@@ -42,7 +45,4 @@ export const validationSchema = Yup.object().shape({
     ),
   description: Yup.string().min(4, 'მინიმუმ 4 სიმბოლო').required('მინიმუმ 4 სიმბოლო'),
   publish_date: Yup.string().required(),
-  categories: Yup.array()
-  .of(Yup.number().required('Each category must be a number'))
-  .required('At least one category is required'),
 });

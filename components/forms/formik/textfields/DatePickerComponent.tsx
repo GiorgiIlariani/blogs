@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useField } from "formik";
 import { DatePickerProps } from "@/types";
 
@@ -15,6 +15,10 @@ const DatePickerComponent: React.FC<DatePickerProps> = ({
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (setFieldValue) setFieldValue(name, e.target.value);
   };
+
+  useEffect(() => {
+    sessionStorage.setItem(name, field.value);
+  }, [field.value, name]);
 
   return (
     <React.Fragment>

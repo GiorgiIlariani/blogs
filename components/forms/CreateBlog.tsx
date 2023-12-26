@@ -1,16 +1,17 @@
 "use client";
 
 import { Form, Formik } from "formik";
-import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { convertImageToBlob } from "@/utils";
 import Modal from "../shared/modal";
 import { initialValues } from "./formik/initialValues";
 import Button from "../UI/Button";
-import { CategoryTypes, FormikValues } from "@/types";
+import { FormikValues } from "@/types";
 import { postCategories } from "@/lib/actions/postCategories";
 import FormControl from "./formik/FormControl";
 import { validationSchema } from "./formik/validation";
+import ImageComponent from "./formik/textfields/imageComponent";
+import { redirect } from "next/navigation";
 
 const CreateBlogForm = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -30,7 +31,8 @@ const CreateBlogForm = () => {
 
         if (result && typeof result === "string") {
           const imageToBinary = convertImageToBlob(result);
-          setFieldValue("image", imageToBinary);
+
+          setFieldValue("image", { name: file.name, url: imageToBinary });
         } else {
           console.error("FileReader result is not a string.");
         }
@@ -45,18 +47,28 @@ const CreateBlogForm = () => {
   };
 
   const onSubmit = async (values: FormikValues, formikHelpers: any) => {
-    await postCategories({
-      title: values.title,
-      description: values.description,
-      image: values.image,
-      publish_date: values.publish_date,
-      author: values.author,
-      categories: values.categories,
-      email: values.email,
-    });
+    const arrayOfNumberCategories = values.categories.map(
+      (category) => category.id
+    );
 
-    setOpenModal(true);
-    formikHelpers.resetForm();
+    try {
+      await postCategories({
+        title: values.title,
+        description: values.description,
+        image: values.image,
+        publish_date: values.publish_date,
+        author: values.author,
+        categories: arrayOfNumberCategories,
+        email: values.email,
+      });
+
+      setOpenModal(true);
+      formikHelpers.resetForm();
+
+      redirect("/");
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
   };
 
   return (
@@ -69,22 +81,14 @@ const CreateBlogForm = () => {
         />
       ) : null}
       <Formik
+        validateOnMount={true}
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmit}>
-        {/* autoComplete="off" */}
-        {({ setFieldValue, values, touched, dirty, isValid, errors }) => {
-          console.log(values);
-          sessionStorage.setItem("formValues", JSON.stringify(values));
+        {({ setFieldValue, isValid, values, isSubmitting, errors }) => {
+          const isFormValid = isValid && values.categories.length > 0;
 
-          const storedFormValuesString = sessionStorage.getItem("formValues");
-          const storedData = storedFormValuesString
-            ? JSON.parse(storedFormValuesString)
-            : {};
-
-          const authorValue = storedData?.author;
-
-          console.log(authorValue);
+          console.log(errors);
 
           return (
             <Form
@@ -94,70 +98,13 @@ const CreateBlogForm = () => {
                 width: "100%",
                 marginTop: "15px",
               }}>
-              <div className="mt-5">
-                <label className="font-semibold">ატვირთეთ ფოტო</label>
-                {!values.image ? (
-                  <div
-                    className={`relative w-full h-[180px] bg-[#F4F3FF] rounded-lg border-dashed border overflow-hidden mt-4 ${
-                      imageTouched && !values.image
-                        ? "text-warning border-warning"
-                        : ""
-                    }`}>
-                    <label htmlFor="image" className="cursor-pointer">
-                      <input
-                        hidden
-                        accept="image/*"
-                        type="file"
-                        id="image"
-                        name="image"
-                        onChange={(e) => handleFileSelect(e, setFieldValue)}
-                        // onClick={() => setImageTouched(true)}
-                      />
-                      <div className="w-full h-full flex items-center justify-center">
-                        <div className="flex flex-col items-center text-center gap-4">
-                          <Image
-                            src="/assets/images/folder-add.png"
-                            alt="add img"
-                            width={40}
-                            height={40}
-                            className="cursor-pointer"
-                          />
-                          <div className="flex items-center gap-1">
-                            <p className="text-sm font-normal">
-                              ჩააგდეთ ფაილი აქ ან
-                            </p>
-                            <label
-                              htmlFor="image"
-                              className="text-gray-600 text-sm font-semibold underline cursor-pointer">
-                              აირჩიეთ ფაილი
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                    </label>
-                  </div>
-                ) : (
-                  <div className="relative w-full h-14 bg-[#F2F2FA] rounded-lg mt-4 flex justify-between items-center px-4">
-                    <div className="flex gap-2 items-center">
-                      <Image
-                        src="/assets/images/gallery.png"
-                        alt="galery"
-                        width={24}
-                        height={24}
-                      />
-                      <p>BlogImg.JPEG</p>
-                    </div>
-                    <Image
-                      src="/assets/images/close.png"
-                      alt="close icon"
-                      width={24}
-                      height={24}
-                      onClick={() => handleImageRemove(setFieldValue)}
-                      className="cursor-pointer"
-                    />
-                  </div>
-                )}
-              </div>
+              <ImageComponent
+                name="image"
+                imageTouched={imageTouched}
+                handleFileSelect={handleFileSelect}
+                setFieldValue={setFieldValue}
+                handleImageRemove={handleImageRemove}
+              />
               <div className="w-full flex flex-col gap-8 mt-5">
                 <div className="flex items-start sm:flex-col gap-6">
                   {/* ავტორი */}
@@ -172,7 +119,6 @@ const CreateBlogForm = () => {
                         "მინიმუმ ორი სიტყვა",
                         "მხოლოდ ქართული სიმბოლოები",
                       ]}
-                      value={authorValue}
                     />
                   </div>
                   {/* სათაური */}
@@ -197,9 +143,9 @@ const CreateBlogForm = () => {
                     minRows={5}
                   />
                 </div>
-                <div className="flex items-center sm:flex-col gap-6">
+                <div className="w-full flex items-center sm:flex-col gap-6">
                   {/* გამოქვეყნების თარიღი */}
-                  <div className="w-full flex flex-col">
+                  <div className="w-[288px] xs:w-full flex flex-col">
                     <FormControl
                       control="date"
                       name="publish_date"
@@ -208,7 +154,7 @@ const CreateBlogForm = () => {
                     />
                   </div>
                   {/* კატეგორია */}
-                  <div className="w-full flex flex-col">
+                  <div className="w-[288px] xs:w-full flex flex-col">
                     <FormControl
                       control="select"
                       setFieldValue={setFieldValue}
@@ -219,7 +165,7 @@ const CreateBlogForm = () => {
                   </div>
                   {/* მეილი */}
                 </div>
-                <div className="w-full flex flex-col">
+                <div className="max-w-[288px] sm:max-w-full flex flex-col">
                   <FormControl
                     control="input"
                     name="email"
@@ -232,12 +178,10 @@ const CreateBlogForm = () => {
                   <Button
                     type="submit"
                     className={`w-[288px] h-[40px] bg-[#5D37F3] ${
-                      !dirty || !isValid
-                        ? "bg-[#E4E3EB] hover:bg-[#E4E3EB]"
-                        : ""
+                      !isFormValid ? "bg-[#E4E3EB] hover:bg-[#E4E3EB]" : ""
                     } hover:bg-[#5D37F3] text-[#FFFFFF] font-normal rounded-[8px]`}
-                    disabled={!dirty || !isValid}
-                    text="გამოქვეყნება"
+                    disabled={!isFormValid}
+                    text={isSubmitting ? "იტვირთება" : "გამოქვეყნება"}
                   />
                 </div>
               </div>

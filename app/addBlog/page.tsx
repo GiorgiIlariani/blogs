@@ -15,7 +15,7 @@ const Page = () => {
   }, []);
 
   return (
-    <main className="min-h-screen bg-[#FBFAFF]">
+    <main className="bg-[#FBFAFF] pb-10">
       <header className="h-20 px-[76px] py-7 bg-[#FFFFFF] flex justify-center items-center">
         <Image
           src="/assets/images/redberry.png"
