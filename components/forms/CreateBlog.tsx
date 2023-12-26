@@ -11,13 +11,10 @@ import { postCategories } from "@/lib/actions/postCategories";
 import FormControl from "./formik/FormControl";
 import { validationSchema } from "./formik/validation";
 import ImageComponent from "./formik/textfields/imageComponent";
-import { useRouter } from "next/navigation";
 
 const CreateBlogForm = () => {
-  const router = useRouter();
   const [openModal, setOpenModal] = useState(false);
   const [imageTouched, setImageTouched] = useState(false);
-  const [returnToMainPage, setReturnToMainPage] = useState(false);
 
   const handleFileSelect = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -67,12 +64,9 @@ const CreateBlogForm = () => {
 
       if (response) {
         setOpenModal(true);
-        setReturnToMainPage(true);
-      }
 
-      if (returnToMainPage) {
-        router.push("/");
         formikHelpers.resetForm();
+
         if (typeof window !== "undefined") sessionStorage.clear();
         sessionStorage.setItem("isAuthorized", "true");
       }

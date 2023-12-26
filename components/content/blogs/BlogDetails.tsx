@@ -37,8 +37,8 @@ const BlogDetails: React.FC<BlogDetailsProps> = async ({
           <h4 className="text-base font-medium">{author}</h4>
           <div className="text-[#85858D] flex items-center gap-2">
             <p>{publish_date.split("-").join(".")}</p>
-            <span>•</span>
-            <p>{email}</p>
+            <span className={`${email === "" ? "hidden" : "block"}`}>•</span>
+            <p className={`${email === "" ? "hidden" : "block"}`}>{email}</p>
           </div>
           <h1 className="font-bold text-[40px] sm:text-[28px] xs:text-[20px]">
             {title}
