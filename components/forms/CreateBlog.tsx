@@ -152,7 +152,7 @@ const CreateBlogForm = () => {
                 </div>
                 <div className="w-full flex items-center sm:flex-col gap-6">
                   {/* გამოქვეყნების თარიღი */}
-                  <div className="w-[288px] xs:w-full flex flex-col">
+                  <div className="w-[288px] sm:w-full flex flex-col">
                     <FormControl
                       control="date"
                       name="publish_date"
@@ -161,7 +161,7 @@ const CreateBlogForm = () => {
                     />
                   </div>
                   {/* კატეგორია */}
-                  <div className="w-[288px] xs:w-full flex flex-col">
+                  <div className="w-[288px] sm:w-full flex flex-col">
                     <FormControl
                       control="select"
                       setFieldValue={setFieldValue}
