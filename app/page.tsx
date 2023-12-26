@@ -3,10 +3,11 @@ import Content from "@/components/content";
 import Header from "@/components/shared/Header";
 import Hero from "@/components/shared/Hero";
 import { fetchCategories } from "@/lib/actions/fetchCategories";
+import { revalidatePath } from "next/cache";
 
 const HomePage = async () => {
   const categories = await fetchCategories();
-
+  revalidatePath("/");
   return (
     <div className="min-h-screen">
       <Header />

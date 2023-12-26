@@ -26,8 +26,13 @@ export type BlogsTypes = {
     categories: CategoryTypes[];
 }
 
+interface ImageType {
+  name: string;
+  url: string;
+}
+
 export type FormikValues = {
-    image: string;
+    image: ImageType;
     author: string;
     title: string;
     description: string;

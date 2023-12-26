@@ -1,6 +1,6 @@
-export const fetchEachBlog = async (id: number) => {
-  const token = '59b997d3c0d701d70d3f7aaf05a79698f07ac3cab638ee76504ec60ecfad9797';
+import { token } from "./accessToken";
 
+export const fetchEachBlog = async (id: number) => {
   try {
     const response = await fetch(`https://api.blog.redberryinternship.ge/api/blogs/${id}`, {
       method: "GET",

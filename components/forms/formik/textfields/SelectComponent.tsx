@@ -71,7 +71,7 @@ const SelectComponent = (props: SelectComponentProps) => {
     }
 
     if (!field.value.includes(category.id)) {
-      setFieldValue!(name, [...field.value, category.id]);
+      setFieldValue!(name, [...field.value, category]);
     }
   };
 

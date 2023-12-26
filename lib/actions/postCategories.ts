@@ -1,6 +1,8 @@
-export const postCategories = async ({ title, description, image, publish_date, author, categories, email }: any) => {
-    const token = '59b997d3c0d701d70d3f7aaf05a79698f07ac3cab638ee76504ec60ecfad9797';
+import { token } from "./accessToken";
 
+export const postCategories = async ({ title, description, image, publish_date, author, categories, email }: any) => {
+    console.log(token);
+    
     const formData = new FormData();
     formData.append('title', title);
     formData.append('description', description);

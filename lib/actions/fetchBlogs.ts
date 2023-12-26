@@ -1,7 +1,7 @@
 import { BlogsTypes } from "@/types";
+import { token } from "./accessToken";
 
 export const fetchBlogs = async (categories: number[]) => {
-  const token = '59b997d3c0d701d70d3f7aaf05a79698f07ac3cab638ee76504ec60ecfad9797';
   try {
     const response = await fetch("https://api.blog.redberryinternship.ge/api/blogs", {
       cache: 'no-store',
@@ -16,6 +16,7 @@ export const fetchBlogs = async (categories: number[]) => {
     }
 
     const { data } = await response.json();
+    
 
     if (categories.length === 0) {
       return data.filter((blog: BlogsTypes) => new Date(blog.publish_date) <= new Date());

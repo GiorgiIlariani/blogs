@@ -13,8 +13,11 @@ const ImageComponent: React.FC<ImageComponentProps> = ({
   const [field] = useField(name);
 
   useEffect(() => {
-    sessionStorage.setItem(name, JSON.stringify(field.value));
-  }, [field.value, name]);
+    sessionStorage.setItem(
+      name,
+      JSON.stringify({ name: field.value.name, url: field.value.url })
+    );
+  }, [field.value]);
 
   const image = field.value.url;
 

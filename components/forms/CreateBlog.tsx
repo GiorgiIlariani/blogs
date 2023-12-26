@@ -11,11 +11,13 @@ import { postCategories } from "@/lib/actions/postCategories";
 import FormControl from "./formik/FormControl";
 import { validationSchema } from "./formik/validation";
 import ImageComponent from "./formik/textfields/imageComponent";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const CreateBlogForm = () => {
+  const router = useRouter();
   const [openModal, setOpenModal] = useState(false);
   const [imageTouched, setImageTouched] = useState(false);
+  const [returnToMainPage, setReturnToMainPage] = useState(false);
 
   const handleFileSelect = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -30,9 +32,7 @@ const CreateBlogForm = () => {
         const result = reader.result;
 
         if (result && typeof result === "string") {
-          const imageToBinary = convertImageToBlob(result);
-
-          setFieldValue("image", { name: file.name, url: imageToBinary });
+          setFieldValue("image", { name: file.name, url: result });
         } else {
           console.error("FileReader result is not a string.");
         }
@@ -44,6 +44,7 @@ const CreateBlogForm = () => {
 
   const handleImageRemove = (setFieldValue: Function) => {
     setFieldValue("image", "");
+    if (typeof window !== "undefined") sessionStorage.removeItem("image");
   };
 
   const onSubmit = async (values: FormikValues, formikHelpers: any) => {
@@ -51,21 +52,30 @@ const CreateBlogForm = () => {
       (category) => category.id
     );
 
+    const imageToBinary = convertImageToBlob(values.image.url);
+
     try {
-      await postCategories({
+      const response = await postCategories({
         title: values.title,
         description: values.description,
-        image: values.image,
+        image: imageToBinary,
         publish_date: values.publish_date,
         author: values.author,
         categories: arrayOfNumberCategories,
         email: values.email,
       });
 
-      setOpenModal(true);
-      formikHelpers.resetForm();
+      if (response) {
+        setOpenModal(true);
+        setReturnToMainPage(true);
+      }
 
-      redirect("/");
+      if (returnToMainPage) {
+        router.push("/");
+        formikHelpers.resetForm();
+        if (typeof window !== "undefined") sessionStorage.clear();
+        sessionStorage.setItem("isAuthorized", "true");
+      }
     } catch (error) {
       console.error("Error submitting form:", error);
     }
@@ -85,11 +95,8 @@ const CreateBlogForm = () => {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmit}>
-        {({ setFieldValue, isValid, values, isSubmitting, errors }) => {
+        {({ setFieldValue, isValid, values, isSubmitting }) => {
           const isFormValid = isValid && values.categories.length > 0;
-
-          console.log(errors);
-
           return (
             <Form
               autoComplete="off"
@@ -180,8 +187,8 @@ const CreateBlogForm = () => {
                     className={`w-[288px] h-[40px] bg-[#5D37F3] ${
                       !isFormValid ? "bg-[#E4E3EB] hover:bg-[#E4E3EB]" : ""
                     } hover:bg-[#5D37F3] text-[#FFFFFF] font-normal rounded-[8px]`}
-                    disabled={!isFormValid}
-                    text={isSubmitting ? "იტვირთება" : "გამოქვეყნება"}
+                    disabled={!isFormValid || isSubmitting}
+                    text={isSubmitting ? "იტვირთება..." : "გამოქვეყნება"}
                   />
                 </div>
               </div>
