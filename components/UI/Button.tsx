@@ -7,6 +7,7 @@ interface ButtonProps {
   className?: string;
   style?: CSSProperties;
   disabled?: boolean;
+  endDecorator?: React.ReactNode;
 }
 
 const Button: FC<ButtonProps> = ({
@@ -16,8 +17,11 @@ const Button: FC<ButtonProps> = ({
   className,
   style,
   disabled,
+  endDecorator,
 }): ReactElement => {
-  const buttonClasses = `px-4 py-2 rounded-[8px]  ${className}`;
+  const buttonClasses = `px-4 py-2 rounded-[8px]  ${className} ${
+    endDecorator ? "flex items-center justify-center gap-2" : ""
+  }`;
 
   return (
     <button
@@ -26,7 +30,8 @@ const Button: FC<ButtonProps> = ({
       className={buttonClasses}
       style={style}
       disabled={disabled}>
-      {text}
+      <div className="flex items-center justify-center">{text}</div>
+      {endDecorator}
     </button>
   );
 };

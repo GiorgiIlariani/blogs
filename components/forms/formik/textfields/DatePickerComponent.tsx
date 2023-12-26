@@ -18,25 +18,17 @@ const DatePickerComponent: React.FC<DatePickerProps> = ({
 
   return (
     <React.Fragment>
-      <label
-        htmlFor={name}
-        className={`${
-          hasError
-            ? "text-warning"
-            : !meta.error && field.value !== "" && meta.touched
-            ? "text-success"
-            : ""
-        } font-semibold`}>
+      <label htmlFor={name} className="font-semibold">
         {label}
       </label>
       <input
         className={`${
           hasError
             ? "border border-warning text-warning"
-            : !meta.error && field.value !== "" && meta.touched
+            : field.value !== ""
             ? "border border-success text-success"
             : ""
-        } w-full px-4 py-5 text-lg bg-transparent mt-2 rounded-xl bg-[#FFFFFF] h-11`}
+        } w-full px-4 py-5 text-lg bg-transparent mt-2 rounded-xl bg-[#FFFFFF] h-11 border-[2px] focus:border-[#5D37F3] outline-none`}
         type="date"
         id={name}
         {...field}

@@ -44,7 +44,6 @@ export type FormControlProps = {
   info?: string[] | string;
   minRows?: number;
   setFieldValue?: Function;
-  categories?: CategoryTypes[];
 }
 
 export type DatePickerProps =  {
@@ -60,4 +59,11 @@ export type InputProps = {
   placeholder?: string;
   info?: string[] | string;
   minRows?: number;
+}
+
+export type  SelectComponentProps = {
+  name: string; 
+  label: string;
+  placeholder?: string;
+  setFieldValue?: Function;
 }

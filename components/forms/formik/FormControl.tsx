@@ -20,9 +20,9 @@ const FormControl = (props: FormControlProps) => {
     return <DatePickerComponent {...otherProps} />;
   }
 
-  //   if (control === "select") {
-  //     return <SelectComponent {...otherProps} />;
-  //   }
+  if (control === "select") {
+    return <SelectComponent {...otherProps} />;
+  }
 
   return null;
 };

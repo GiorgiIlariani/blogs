@@ -11,18 +11,17 @@ import Button from "../UI/Button";
 import { CategoryTypes, FormikValues } from "@/types";
 import { postCategories } from "@/lib/actions/postCategories";
 import FormControl from "./formik/FormControl";
+import { validationSchema } from "./formik/validation";
 
-type CreateBlogFormProps = {
-  categories: CategoryTypes[];
-};
-
-const CreateBlogForm: React.FC<CreateBlogFormProps> = ({ categories }) => {
+const CreateBlogForm = () => {
   const [openModal, setOpenModal] = useState(false);
+  const [imageTouched, setImageTouched] = useState(false);
 
   const handleFileSelect = (
     e: React.ChangeEvent<HTMLInputElement>,
     setFieldValue: Function
   ) => {
+    setImageTouched(true);
     const file = e.target.files?.[0];
 
     if (file) {
@@ -31,8 +30,6 @@ const CreateBlogForm: React.FC<CreateBlogFormProps> = ({ categories }) => {
         const result = reader.result;
 
         if (result && typeof result === "string") {
-          // const data = result.split(",")[1];
-          // const binaryBlob = atob(data);
           const imageToBinary = convertImageToBlob(result);
           setFieldValue("image", imageToBinary);
         } else {
@@ -74,10 +71,12 @@ const CreateBlogForm: React.FC<CreateBlogFormProps> = ({ categories }) => {
       ) : null}
       <Formik
         initialValues={initialValues}
-        // validationSchema={validationSchema}
+        validationSchema={validationSchema}
         onSubmit={onSubmit}>
         {/* autoComplete="off" */}
-        {({ setFieldValue, values, touched, dirty, isValid }) => {
+        {({ setFieldValue, values, touched, dirty, isValid, errors }) => {
+          console.log(values);
+
           return (
             <Form
               autoComplete="off"
@@ -86,10 +85,15 @@ const CreateBlogForm: React.FC<CreateBlogFormProps> = ({ categories }) => {
                 width: "100%",
                 marginTop: "15px",
               }}>
-              {/* <div classname="mt-5">
+              <div className="mt-5">
                 <label className="font-semibold">ატვირთეთ ფოტო</label>
                 {!values.image ? (
-                  <div className="relative w-full h-[180px] bg-[#F4F3FF] rounded-lg border-dashed border overflow-hidden mt-4">
+                  <div
+                    className={`relative w-full h-[180px] bg-[#F4F3FF] rounded-lg border-dashed border overflow-hidden mt-4 ${
+                      imageTouched && !values.image
+                        ? "text-warning border-warning"
+                        : ""
+                    }`}>
                     <label htmlFor="image" className="cursor-pointer">
                       <input
                         hidden
@@ -98,6 +102,7 @@ const CreateBlogForm: React.FC<CreateBlogFormProps> = ({ categories }) => {
                         id="image"
                         name="image"
                         onChange={(e) => handleFileSelect(e, setFieldValue)}
+                        // onClick={() => setImageTouched(true)}
                       />
                       <div className="w-full h-full flex items-center justify-center">
                         <div className="flex flex-col items-center text-center gap-4">
@@ -143,11 +148,11 @@ const CreateBlogForm: React.FC<CreateBlogFormProps> = ({ categories }) => {
                     />
                   </div>
                 )}
-              </div> */}
-              <div className="w-full flex flex-col gap-4">
-                {/* ავტორი */}
-                <div className="flex items-center sm:flex-col gap-6">
-                  <div className="w-full">
+              </div>
+              <div className="w-full flex flex-col gap-8 mt-5">
+                <div className="flex items-start sm:flex-col gap-6">
+                  {/* ავტორი */}
+                  <div className="w-full flex flex-col">
                     <FormControl
                       control="input"
                       name="author"
@@ -161,7 +166,7 @@ const CreateBlogForm: React.FC<CreateBlogFormProps> = ({ categories }) => {
                     />
                   </div>
                   {/* სათაური */}
-                  <div className="w-full">
+                  <div className="w-full flex flex-col">
                     <FormControl
                       control="input"
                       name="title"
@@ -172,7 +177,7 @@ const CreateBlogForm: React.FC<CreateBlogFormProps> = ({ categories }) => {
                   </div>
                 </div>
                 {/* აღწერა */}
-                <div>
+                <div className="w-full flex flex-col">
                   <FormControl
                     control="textarea"
                     name="description"
@@ -182,43 +187,49 @@ const CreateBlogForm: React.FC<CreateBlogFormProps> = ({ categories }) => {
                     minRows={5}
                   />
                 </div>
-                {/* გამოქვეყნების თარიღი */}
-                <div>
-                  <FormControl
-                    control="date"
-                    name="publish_date"
-                    label="გამოქვექნების თარიღი*"
-                    setFieldValue={setFieldValue}
-                  />
+                <div className="flex items-center sm:flex-col gap-6">
+                  {/* გამოქვეყნების თარიღი */}
+                  <div className="w-full flex flex-col">
+                    <FormControl
+                      control="date"
+                      name="publish_date"
+                      label="გამოქვექნების თარიღი*"
+                      setFieldValue={setFieldValue}
+                    />
+                  </div>
+                  {/* კატეგორია */}
+                  <div className="w-full flex flex-col">
+                    <FormControl
+                      control="select"
+                      setFieldValue={setFieldValue}
+                      name="categories"
+                      label="კატეგორია"
+                      placeholder="აირჩიეთ კატეგორია"
+                    />
+                  </div>
+                  {/* მეილი */}
                 </div>
-                {/* კატეგორია */}
-                <div>
-                  {/* <FormControl
-                    control="select"
-                    setFieldValue={setFieldValue}
-                    name="categories"
-                    label="კატეგორია"
-                    placeholder="აირჩიეთ კატეგორია"
-                    categories={categories} 
-                  /> */}
-                </div>
-                {/* მეილი */}
-                <div>
+                <div className="w-full flex flex-col">
                   <FormControl
                     control="input"
                     name="email"
                     label="ელ-ფოსტა*"
                     placeholder="Example@redberry.ge"
+                    info="მეილი უნდა მთავრდებოდეს redberry.ge-ით"
                   />
                 </div>
-              </div>
-              <div className="flex justify-end mt-10">
-                <Button
-                  type="submit"
-                  className="w-[288px] h-[40px] bg-[#5D37F3] hover:bg-[#5D37F3] text-[#FFFFFF] font-normal rounded-[8px]"
-                  disabled={!dirty || !isValid}
-                  text="გამოქვეყნება"
-                />
+                <div className="flex justify-end mt-10">
+                  <Button
+                    type="submit"
+                    className={`w-[288px] h-[40px] bg-[#5D37F3] ${
+                      !dirty || !isValid
+                        ? "bg-[#E4E3EB] hover:bg-[#E4E3EB]"
+                        : ""
+                    } hover:bg-[#5D37F3] text-[#FFFFFF] font-normal rounded-[8px]`}
+                    disabled={!dirty || !isValid}
+                    text="გამოქვეყნება"
+                  />
+                </div>
               </div>
             </Form>
           );

@@ -1,22 +1,18 @@
-// "use client";
+"use client";
 
 import CreateBlogForm from "@/components/forms/CreateBlog";
-import { fetchCategories } from "@/lib/actions/fetchCategories";
 import Image from "next/image";
-// import { redirect } from "next/navigation";
-import React from "react";
+import React, { useLayoutEffect } from "react";
+import { redirect } from "next/navigation";
 
-const Page = async () => {
-  const categories = await fetchCategories();
-  // useLayoutEffect(() => {
-  //   const isAuth =
-  //     typeof window !== "undefined" &&
-  //     Boolean(sessionStorage.getItem("isAuthorized"));
+const Page = () => {
+  useLayoutEffect(() => {
+    const isAuthorized = Boolean(sessionStorage.getItem("isAuthorized"));
 
-  //   if (!isAuth) {
-  //     redirect("/");
-  //   }
-  // }, []);
+    if (!isAuthorized) {
+      redirect("/");
+    }
+  }, []);
 
   return (
     <main className="min-h-screen bg-[#FBFAFF]">
@@ -29,12 +25,12 @@ const Page = async () => {
           className="cursor-pointer"
         />
       </header>
-      <div className="max-w-[600px] my-10 mx-auto">
-        <h1 className="text-[#1A1A1F] text-[32px] font-bold mx-4">
-          ბლოგის დამატება
-        </h1>
-        <div className="mx-4">
-          <CreateBlogForm categories={categories} />
+      <div className="w-full px-4">
+        <div className="max-w-[600px] my-10 mx-auto">
+          <h1 className="text-[#1A1A1F] text-[32px] sm:text-[24px] font-bold">
+            ბლოგის დამატება
+          </h1>
+          <CreateBlogForm />
         </div>
       </div>
     </main>
