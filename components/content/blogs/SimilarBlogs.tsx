@@ -78,7 +78,6 @@ const SimilarBlogs = ({ similarBlogs }: SimilarBlogsProps) => {
               title={blog.title}
               categories={blog.categories}
               description={blog.description}
-              scrolable={true}
             />
           </SwiperSlide>
         ))}
