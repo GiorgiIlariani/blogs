@@ -16,10 +16,19 @@ export const fetchBlogs = async (categories: number[]) => {
     }
 
     const { data } = await response.json();
+    console.log(data);
+    
+
+    const filtered = data[0].publish_date;
+    
+    console.log({ entryDate: new Date(filtered), now: new Date() });
+    console.log(new Date(filtered) <= new Date());
+    
+    
     
 
     if (categories.length === 0) {
-      return data.filter((blog: BlogsTypes) => new Date(blog.publish_date) <= new Date());
+       return data.filter((blog: BlogsTypes) => new Date(blog.publish_date) <= new Date());
     } else {
       return data.filter(
         (blog: BlogsTypes) =>
@@ -27,6 +36,7 @@ export const fetchBlogs = async (categories: number[]) => {
           new Date(blog.publish_date) <= new Date()
       );
     }
+    
 
   } catch (error) {
     console.error("Error fetching blogs:", error);

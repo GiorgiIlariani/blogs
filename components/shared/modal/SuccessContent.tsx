@@ -10,7 +10,7 @@ const SuccessContent = () => {
         width={64}
         height={64}
       />
-      <h3 className="font-bold text-xl text-[#1A1A1F] mb-4">
+      <h3 className="font-bold text-xl text-[#1A1A1F] mb-4 text-center">
         წარმატებული ავტორიზაცია
       </h3>
     </div>
