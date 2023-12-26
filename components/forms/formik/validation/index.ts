@@ -28,7 +28,7 @@ export const validationSchema = Yup.object().shape({
     .required("მინიმუმ 4 სიმბოლო"),
   image: Yup.object().shape({
     name: Yup.string().required('Image name is required'),
-    url: Yup.object().required('Image URL is required'),
+    url: Yup.mixed().required('Image URL is required'),
   }).required("გთხოვთ ატვირთოთ თქვენი ფოტო!"),
   email: Yup.string().test(
       "is-valid-email",
