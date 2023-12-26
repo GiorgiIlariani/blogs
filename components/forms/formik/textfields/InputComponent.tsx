@@ -80,8 +80,10 @@ import Image from "next/image";
 import { InputProps } from "@/types";
 
 const InputComponent: React.FC<InputProps> = (props) => {
-  const { label, name, placeholder, info } = props;
+  const { label, name, placeholder, info, value } = props;
   const [field, meta] = useField(name);
+
+  console.log({ value });
 
   const hasError =
     (meta.touched && Boolean(meta.error)) ||
@@ -99,7 +101,9 @@ const InputComponent: React.FC<InputProps> = (props) => {
       </label>
       <input
         id={name}
-        {...field}
+        onChange={field.onChange}
+        onBlur={field.onBlur}
+        value={value}
         type="input"
         placeholder={placeholder}
         className={`rounded-[12px] mt-[10px] bg-[#FFFFFF] w-full px-4 py-[10px] border-[2px] focus:border-[#5D37F3] outline-none ${

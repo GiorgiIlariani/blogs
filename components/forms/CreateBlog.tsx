@@ -1,9 +1,8 @@
 "use client";
 
 import { Form, Formik } from "formik";
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { convertImageToBlob } from "@/utils";
 import Modal from "../shared/modal";
 import { initialValues } from "./formik/initialValues";
@@ -76,6 +75,16 @@ const CreateBlogForm = () => {
         {/* autoComplete="off" */}
         {({ setFieldValue, values, touched, dirty, isValid, errors }) => {
           console.log(values);
+          sessionStorage.setItem("formValues", JSON.stringify(values));
+
+          const storedFormValuesString = sessionStorage.getItem("formValues");
+          const storedData = storedFormValuesString
+            ? JSON.parse(storedFormValuesString)
+            : {};
+
+          const authorValue = storedData?.author;
+
+          console.log(authorValue);
 
           return (
             <Form
@@ -163,6 +172,7 @@ const CreateBlogForm = () => {
                         "მინიმუმ ორი სიტყვა",
                         "მხოლოდ ქართული სიმბოლოები",
                       ]}
+                      value={authorValue}
                     />
                   </div>
                   {/* სათაური */}

@@ -1,22 +1,24 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { SelectComponentProps, CategoryTypes } from "@/types";
 import { useField } from "formik";
 import { fetchCategories } from "@/lib/actions/fetchCategories";
 import { IoIosArrowDown } from "react-icons/io";
 import Button from "@/components/UI/Button";
-import Image from "next/image";
 import { IoIosClose } from "react-icons/io";
 
 const SelectComponent = (props: SelectComponentProps) => {
   const { name, label, placeholder, setFieldValue } = props;
-  const [field, meta] = useField(name);
+  const [field] = useField(name);
   const [categories, setCategories] = useState<CategoryTypes[]>([]);
   const [selectedCategories, setSelectedCategories] = useState<CategoryTypes[]>(
     []
   );
   const [showOptions, setShowOptions] = useState(false);
+  const [isTouched, setIsTouched] = useState(false);
+  const [isCategoryRemoved, setIsCategoryRemoved] = useState(false);
+  const mainDivRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const fetchAllCategories = async () => {
@@ -31,7 +33,24 @@ const SelectComponent = (props: SelectComponentProps) => {
     fetchAllCategories();
   }, []);
 
-  const hasError = meta.touched && selectedCategories.length === 0;
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (
+        mainDivRef.current &&
+        !mainDivRef.current.contains(event.target as Node)
+      ) {
+        // Clicked outside the main div
+        setShowOptions(false);
+        setIsTouched(true);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
 
   const handleCategories = (category: CategoryTypes) => {
     const exists = selectedCategories.some(
@@ -50,17 +69,42 @@ const SelectComponent = (props: SelectComponentProps) => {
     }
   };
 
-  const handleCategoryRemove = () => {};
+  const handleCategoryRemove = (id: number) => {
+    const remainingCategories = selectedCategories.filter(
+      (item) => item.id !== id
+    );
+
+    const remainingCategoriesIds = remainingCategories.map((item) => item.id);
+
+    setIsCategoryRemoved(true);
+    setSelectedCategories(remainingCategories);
+    setFieldValue!(name, remainingCategoriesIds);
+  };
 
   const handleOptions = () => {
     setShowOptions((prev) => !prev);
+    setIsTouched(true);
   };
+
+  const hasError = isTouched && selectedCategories.length === 0;
+  const isValid = selectedCategories.length > 0;
 
   return (
     <div className="flex flex-col gap-[10px] w-[288px] relative">
       <h3 className="font-semibold text-base">{label}</h3>
       <div
-        className="w-full h-[44px] rounded-[12px] flex items-center gap-2 overflow-x-hidden overflow-y-hidden text-xs relative border border-[#e4e3eb] px-[10px]"
+        className={`w-full h-[44px] rounded-[12px] flex items-center gap-2 overflow-x-hidden overflow-y-hidden text-xs relative px-[10px] cursor-pointer border
+        ${
+          isValid
+            ? "border-success"
+            : hasError && isCategoryRemoved
+            ? "border-warning"
+            : isTouched && !isValid && showOptions
+            ? "border-[#5D37F3]"
+            : ""
+        }
+        `}
+        ref={mainDivRef}
         onClick={handleOptions}>
         {selectedCategories.map((item) => (
           <Button
@@ -74,7 +118,7 @@ const SelectComponent = (props: SelectComponentProps) => {
             endDecorator={
               <div
                 className="text-white text-xl flex items-center justify-center cursor-pointer"
-                onClick={handleCategoryRemove}>
+                onClick={() => handleCategoryRemove(item.id)}>
                 <IoIosClose />
               </div>
             }
@@ -88,7 +132,9 @@ const SelectComponent = (props: SelectComponentProps) => {
         </div>
       </div>
       {showOptions && (
-        <div className="w-full max-h-[144px] flex flex-wrap gap-2 border border-[#e4e3eb] rounded-[12px] p-[10px] overflow-y-scroll absolute top-20 bg-white">
+        <div
+          className="w-full max-h-[144px] flex flex-wrap gap-2 border border-[#e4e3eb] rounded-[12px] p-[10px] overflow-y-scroll absolute top-20 bg-white"
+          ref={mainDivRef}>
           {categories.map((item) => (
             <Button
               text={item.title}

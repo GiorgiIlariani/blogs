@@ -19,7 +19,7 @@ const TextareaComponent = (props: any) => {
         rows={minRows}
         {...field}
         placeholder={placeholder}
-        className={`w-full min-h-[150px] mt-[10px] border-[#FAF2F3] p-[10px] rounded-[12px] border-[2px] focus:border-[#5D37F3] outline-none ${
+        className={`w-full min-h-[150px] mt-[10px] border-[#FAF2F3] p-[10px] rounded-[12px] border-[2px] focus:border-[#5D37F3] outline-none resize-none ${
           hasError
             ? "border border-warning"
             : field.value.length >= 4
