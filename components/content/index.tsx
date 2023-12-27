@@ -8,10 +8,10 @@ import CategoriesList from "./categories";
 import FetchBlogsLoading from "../loadings/fetchAllBlogsLoading";
 
 type BlogsProps = {
-  categories: CategoryTypes[];
+  // categories: CategoryTypes[];
 };
 
-const MainContent: React.FC<BlogsProps> = ({ categories }) => {
+const MainContent: React.FC<BlogsProps> = () => {
   const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
   const [blogs, setBlogs] = useState<BlogsTypes[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -35,11 +35,11 @@ const MainContent: React.FC<BlogsProps> = ({ categories }) => {
 
   return (
     <>
-      <CategoriesList
+      {/* <CategoriesList
         categories={categories}
         selectedCategories={selectedCategories}
         setSelectedCategories={setSelectedCategories}
-      />
+      /> */}
       {isLoading ? <FetchBlogsLoading /> : <BlogsList filteredBlogs={blogs} />}
     </>
   );
