@@ -32,7 +32,7 @@ const EachBlog = ({
         <h3 className="text-xl xs:text-lg font-semibold h-14 w-full overflow-hidden overflow-ellipsis break-words">{`${title.slice(
           0,
           50
-        )}...`}</h3>
+        )}${title.length > 50 ? "..." : ""}`}</h3>
         <div className="w-full flex items-center gap-4 flex-wrap">
           {categories.map((category) => (
             <Button
@@ -52,9 +52,13 @@ const EachBlog = ({
           <p className="text-base xs:text-sm font-normal w-full overflow-hidden overflow-ellipsis break-words">{`${description.slice(
             0,
             85
-          )}...`}</p>
+          )}${description.length > 85 ? "..." : ""}`}</p>
           <div className="flex items-center gap-1 cursor-pointer">
-            <p className="text-[#5D37F3] text-sm font-medium"> სრულად ნახვა</p>
+            <Link
+              href={`/blogDetails/${id}`}
+              className="text-[#5D37F3] text-sm font-medium">
+              სრულად ნახვა
+            </Link>
             <Image
               src="/assets/images/Arrow.png"
               alt="arrow"

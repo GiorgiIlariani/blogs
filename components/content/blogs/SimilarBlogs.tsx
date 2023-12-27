@@ -24,16 +24,10 @@ const SimilarBlogs = ({ similarBlogs }: SimilarBlogsProps) => {
           მსგავსი სტატიები
         </h2>
         <div className="flex items-center gap-x-4">
-          <button
-            className={`image-swiper-button-prev`}
-            // onClick={handlePrevious}
-          >
+          <button className="image-swiper-btn image-swiper-button-prev">
             <ChevronLeftIcon />
           </button>
-          <button
-            className={`image-swiper-button-next`}
-            // onClick={handleNext}
-          >
+          <button className="image-swiper-btn image-swiper-button-next">
             <ChevronRightIcon />
           </button>
         </div>

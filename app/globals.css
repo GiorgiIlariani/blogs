@@ -22,7 +22,7 @@
 }
 
 
-.image-swiper-button-next {
+.image-swiper-btn {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -32,18 +32,6 @@
     color: white;
     cursor: pointer;
     background-color: #5D37F3;
-}
-
-.image-swiper-button-prev {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  color: white;
-  cursor: pointer;
-  background-color: #5D37F3;
 }
 
 .swiper-button-disabled {
