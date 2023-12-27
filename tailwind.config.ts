@@ -36,7 +36,10 @@ const config: Config = {
       // => @media (max-width: 640px) { ... }
 
       xs: { max: "500px" },
-      // => @media (max-width: 5000px) { ... }
+      // => @media (max-width: 500px) { ... }
+
+      blogsResponsive: { max: '440px' },
+      // => @media (max-width: 450px) { ... }
 
       "2xs": { max: "390px" },
       // => @media (max-width: 390px) { ... }

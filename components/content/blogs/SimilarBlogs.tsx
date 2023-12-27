@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import EachBlog from "./EachBlog";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
@@ -10,46 +10,45 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 
+import { Navigation } from "swiper/modules";
+
 interface SimilarBlogsProps {
   similarBlogs: BlogsTypes[];
 }
 
 const SimilarBlogs = ({ similarBlogs }: SimilarBlogsProps) => {
-  const [slidePosition, setSlidePosition] = useState(0);
-
   return (
-    <div className="w-full mt-20 max-w-[1288px] mx-auto">
+    <div className="w-full mt-20 max-w-[1288px] mx-auto relative">
       <div className="flex items-center justify-between">
         <h2 className="font-bold text-[32px] md:text-[24px] xs:text-[20px]">
           მსგავსი სტატიები
         </h2>
         <div className="flex items-center gap-x-4">
-          <div
-            className={`flex justify-center items-center w-[38px] h-[38px] rounded-full text-white cursor-pointer ${
-              // !isAtStart ? "bg-[#5D37F3]" : "bg-[#E4E3EB]"'
-              ""
-            }`}
-            // onClick={() => scrollTo(-424)}
+          <button
+            className={`image-swiper-button-prev`}
+            // onClick={handlePrevious}
           >
             <ChevronLeftIcon />
-          </div>
-          <div
-            className={`flex justify-center items-center w-[38px] h-[38px] text-white rounded-full cursor-pointer ${
-              // !isAtEnd ? "bg-[#5D37F3]" : "bg-[#E4E3EB]"
-              ""
-            }`}
-            // onClick={() => scrollTo(424)}
+          </button>
+          <button
+            className={`image-swiper-button-next`}
+            // onClick={handleNext}
           >
             <ChevronRightIcon />
-          </div>
+          </button>
         </div>
       </div>
       <Swiper
         mousewheel
         direction="horizontal"
         className="mySwiper"
-        onSlideChange={() => console.log("slide change")}
         pagination={false}
+        navigation={{
+          nextEl: ".image-swiper-button-next",
+          prevEl: ".image-swiper-button-prev",
+          disabledClass: "swiper-button-disabled",
+        }}
+        modules={[Navigation]}
         breakpoints={{
           1200: {
             slidesPerView: 3,

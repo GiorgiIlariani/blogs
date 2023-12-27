@@ -14,14 +14,14 @@ const EachBlog = ({
   description,
 }: BlogsTypes) => {
   return (
-    <div className="max-w-[408px] flex flex-col gap-4 my-4">
+    <div className="w-[408px] blogsResponsive:w-[350px] flex flex-col gap-4 my-4">
       <Link href={`/blogDetails/${id}`} className="cursor-pointer">
         <Image
           src={image}
           alt="test img"
           width={408}
           height={328}
-          className="object-cover w-[408px] h-[328px] xs:h-[270px] rounded-[12px]"
+          className="object-cover w-[408px] blogsResponsive:w-[350px] h-[328px] blogsResponsive:h-[300px] rounded-[12px]"
         />
       </Link>
       <div className="w-full flex flex-col gap-4 justify-between">
@@ -29,7 +29,7 @@ const EachBlog = ({
           <h4 className="text-base font-semibold">{author}</h4>
           <p className="text-xs text-[#85858D]">{publish_date}</p>
         </div>
-        <h3 className="text-xl xs:text-lg font-semibold h-14">{`${title.slice(
+        <h3 className="text-xl xs:text-lg font-semibold h-14 w-full overflow-hidden overflow-ellipsis break-words">{`${title.slice(
           0,
           50
         )}...`}</h3>
@@ -49,7 +49,7 @@ const EachBlog = ({
         </div>
 
         <div className="flex flex-col gap-3">
-          <p className="text-base xs:text-sm font-normal">{`${description.slice(
+          <p className="text-base xs:text-sm font-normal w-full overflow-hidden overflow-ellipsis break-words">{`${description.slice(
             0,
             85
           )}...`}</p>

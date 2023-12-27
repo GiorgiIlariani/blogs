@@ -4,6 +4,7 @@ import { fetchBlogs } from "@/lib/actions/fetchBlogs";
 import { fetchEachBlog } from "@/lib/actions/fetchEachBlog";
 import BlogDetails from "@/components/content/blogs/BlogDetails";
 import { BlogsTypes, CategoryTypes } from "@/types";
+import BackBtn from "@/components/UI/BackBtn";
 
 const Page = async ({ params }: { params: { id: string } }) => {
   const blogDetails = await fetchEachBlog(Number(params.id));
@@ -22,22 +23,25 @@ const Page = async ({ params }: { params: { id: string } }) => {
   );
 
   return (
-    <div className="pb-10">
-      <div className="max-w-[720px] mx-auto flex flex-col my-10 px-6 sm:px-2">
-        <BlogDetails
-          title={title}
-          description={description}
-          image={image}
-          publish_date={publish_date}
-          categories={categories}
-          author={author}
-          email={email}
-        />
+    <>
+      <BackBtn />
+      <div className="py-10">
+        <div className="max-w-[720px] mx-auto flex flex-col my-10 px-6 sm:px-2">
+          <BlogDetails
+            title={title}
+            description={description}
+            image={image}
+            publish_date={publish_date}
+            categories={categories}
+            author={author}
+            email={email}
+          />
+        </div>
+        <div className="w-full px-4">
+          <SimilarBlogs similarBlogs={filteredSimilarBlogs} />
+        </div>
       </div>
-      <div className="w-full px-4">
-        <SimilarBlogs similarBlogs={filteredSimilarBlogs} />
-      </div>
-    </div>
+    </>
   );
 };
 

@@ -1,4 +1,3 @@
-import { fetchEachBlog } from "@/lib/actions/fetchEachBlog";
 import { CategoryTypes } from "@/types";
 import Image from "next/image";
 import React from "react";
@@ -37,10 +36,10 @@ const BlogDetails: React.FC<BlogDetailsProps> = async ({
           <h4 className="text-base font-medium">{author}</h4>
           <div className="text-[#85858D] flex items-center gap-2">
             <p>{publish_date.split("-").join(".")}</p>
-            <span className={`${email === "" ? "hidden" : "block"}`}>•</span>
-            <p className={`${email === "" ? "hidden" : "block"}`}>{email}</p>
+            {/* <span className={`${email === "" ? "hidden" : "block"}`}></span> */}
+            <p className={`${email === "" ? "hidden" : "block"}`}>•{email}</p>
           </div>
-          <h1 className="font-bold text-[40px] sm:text-[28px] xs:text-[20px]">
+          <h1 className="font-bold text-[40px] sm:text-[28px] xs:text-[20px] w-full overflow-hidden break-words">
             {title}
           </h1>
           <div className="w-full flex items-center flex-wrap gap-2">
@@ -57,7 +56,9 @@ const BlogDetails: React.FC<BlogDetailsProps> = async ({
             ))}
           </div>
         </div>
-        <p className="text-[#404049]">{description}</p>
+        <p className="text-[#404049] w-full overflow-hidden break-words">
+          {description}
+        </p>
       </div>
     </>
   );
