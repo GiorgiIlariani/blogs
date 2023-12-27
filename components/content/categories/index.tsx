@@ -3,6 +3,10 @@
 import { CategoryTypes } from "@/types";
 import React, { Dispatch, SetStateAction } from "react";
 import Button from "../../UI/Button";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
 
 type CategoriesProps = {
   categories: CategoryTypes[];
@@ -15,13 +19,10 @@ const CategoriesList = ({
   setSelectedCategories,
 }: CategoriesProps) => {
   const handleCategoryClick = (index: number) => {
-    // Calculate the value to be added to the selectedCategories array
     const valueToAdd = index + 1;
 
-    // Check if the category is already selected
     const isSelected = selectedCategories.includes(valueToAdd);
 
-    // If selected, remove from the array; otherwise, add to the array
     setSelectedCategories((prevSelectedCategories) =>
       isSelected
         ? prevSelectedCategories.filter(
@@ -32,21 +33,33 @@ const CategoriesList = ({
   };
 
   return (
-    <div className="max-w-[684px] mx-auto flex items-center justify-center gap-[10px] flex-wrap">
-      {categories.map(({ title, text_color, id, background_color }, index) => (
-        <Button
-          key={id}
-          onClick={() => handleCategoryClick(index)}
-          text={title}
-          style={{
-            color: text_color,
-            backgroundColor: background_color,
-            border: selectedCategories.includes(index + 1)
-              ? "1px solid #000000"
-              : "1px solid transparent",
-          }}
-        />
-      ))}
+    <div className="max-w-[670px] mx-auto flex items-center gap-[10px]">
+      <Swiper
+        mousewheel
+        direction="horizontal"
+        className="mySwiper"
+        slidesPerView={"auto"}
+        spaceBetween={10}
+        pagination={false}>
+        {categories.map(
+          ({ title, text_color, id, background_color }, index) => (
+            <SwiperSlide key={id} style={{ width: "auto" }} className="w-auto">
+              <Button
+                onClick={() => handleCategoryClick(index)}
+                text={title}
+                style={{
+                  color: text_color,
+                  backgroundColor: background_color,
+                  border: selectedCategories.includes(index + 1)
+                    ? "1px solid #000000"
+                    : "1px solid transparent",
+                }}
+                className=""
+              />
+            </SwiperSlide>
+          )
+        )}
+      </Swiper>
     </div>
   );
 };

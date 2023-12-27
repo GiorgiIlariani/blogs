@@ -14,6 +14,7 @@ export const fetchEachBlog = async (id: number) => {
     }
 
     const data = await response.json();
+    
 
     // Check if data.email exists, and return it or an empty string accordingly
     const email = data.email ? data.email : '';
