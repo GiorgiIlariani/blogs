@@ -4,7 +4,7 @@ import React from "react";
 
 type AuthorizationContentProps = {
   value: string;
-  isValidEmail: boolean;
+  isAuthorizationSuccessful?: boolean;
   touched: boolean;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleBlur: () => void;
@@ -12,7 +12,7 @@ type AuthorizationContentProps = {
 
 const AuthorizationContent: React.FC<AuthorizationContentProps> = ({
   value,
-  isValidEmail,
+  isAuthorizationSuccessful,
   touched,
   handleChange,
   handleBlur,
@@ -30,13 +30,15 @@ const AuthorizationContent: React.FC<AuthorizationContentProps> = ({
           type="text"
           placeholder="Example@redberry.ge"
           className={`rounded-[12px] px-4 py-3 bg-[#F7F7FF] border ${
-            touched && !isValidEmail ? "border-[#EA1919]" : "border-[#5D37F3]"
+            touched && !isAuthorizationSuccessful
+              ? "border-[#EA1919]"
+              : "border-[#5D37F3]"
           } outline-none`}
           value={value}
           onChange={handleChange}
           onBlur={handleBlur}
         />
-        {!isValidEmail && touched ? (
+        {!isAuthorizationSuccessful && touched ? (
           <div className="flex items-center gap-3">
             <Image
               src="/assets/images/warning.png"
@@ -44,9 +46,7 @@ const AuthorizationContent: React.FC<AuthorizationContentProps> = ({
               width={20}
               height={20}
             />
-            <p className="text-[#EA1919] text-sm">
-              მეილი უნდა მთავრდებოდეს redberry.ge - ით
-            </p>
+            <p className="text-[#EA1919] text-sm">ელ-ფოსტა არ მოიძებნა</p>
           </div>
         ) : null}
       </div>

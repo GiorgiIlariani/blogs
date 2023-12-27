@@ -1,6 +1,6 @@
 import { token } from "./accessToken";
 
-export const authenticateUser = async (email: string) => {  
+export const authenticateUser = async (email: string) => {    
   try {
     const response = await fetch(
       "https://api.blog.redberryinternship.ge/api/login",

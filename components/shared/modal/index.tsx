@@ -21,16 +21,12 @@ export default function Modal({
 }: ModalProps) {
   const router = useRouter();
   const [value, setValue] = useState("");
-  const [isValidEmail, setIsValidEmail] = useState(false);
   const [touched, setTouched] = useState(false);
 
   // Event handlers
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const enteredEmail = e.target.value;
     setValue(enteredEmail);
-
-    const emailRegex = /^[A-Za-z0-9._%+-]+@redberry\.ge$/;
-    setIsValidEmail(emailRegex.test(enteredEmail));
   };
 
   const handleBlur = () => setTouched(true);
@@ -40,12 +36,10 @@ export default function Modal({
 
     setTouched(true);
 
-    if (isValidEmail) {
-      const isAuthorized = await authenticateUser(value);
-      setIsAuthorizationSuccessful!(isAuthorized);
-      typeof window !== "undefined" &&
-        sessionStorage.setItem("isAuthorized", "true");
-    }
+    const isAuthorized = await authenticateUser(value);
+    setIsAuthorizationSuccessful!(isAuthorized);
+    typeof window !== "undefined" &&
+      sessionStorage.setItem("isAuthorized", "true");
   };
 
   const handleFormSubmited = () => router.push("/");
@@ -58,7 +52,7 @@ export default function Modal({
   ) : (
     <AuthorizationContent
       value={value}
-      isValidEmail={isValidEmail}
+      isAuthorizationSuccessful={isAuthorizationSuccessful}
       touched={touched}
       handleChange={handleChange}
       handleBlur={handleBlur}
