@@ -37,13 +37,14 @@ const CategoriesList = ({
       <Swiper
         mousewheel
         direction="horizontal"
-        className="mySwiper"
+        className="mySwiper no-scrollbar"
         slidesPerView={"auto"}
         spaceBetween={10}
-        pagination={false}>
+        pagination={false}
+        style={{ overflowX: "scroll" }}>
         {categories.map(
           ({ title, text_color, id, background_color }, index) => (
-            <SwiperSlide key={id} style={{ width: "auto" }} className="w-auto">
+            <SwiperSlide key={id} style={{ width: "auto" }}>
               <Button
                 onClick={() => handleCategoryClick(index)}
                 text={title}
