@@ -1,5 +1,6 @@
 import { token } from "./accessToken";
 
+// check
 export const fetchCategories = async () => {
   try {
     const response = await fetch(
