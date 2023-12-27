@@ -7,7 +7,9 @@ import { revalidatePath } from "next/cache";
 
 const HomePage = async () => {
   const categories = await fetchCategories();
-  revalidatePath("/");
+
+  // revalidatePath("/");
+
   return (
     <div className="min-h-screen">
       <Header />
