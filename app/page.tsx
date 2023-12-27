@@ -5,7 +5,7 @@ import Hero from "@/components/shared/Hero";
 import { fetchCategories } from "@/lib/actions/fetchCategories";
 import { revalidatePath } from "next/cache";
 
-const HomePage = async () => {
+const Page = async () => {
   const categories = await fetchCategories();
 
   revalidatePath("/");
@@ -21,4 +21,4 @@ const HomePage = async () => {
   );
 };
 
-export default HomePage;
+export default Page;

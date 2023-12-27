@@ -1,8 +1,14 @@
-// check
+import { token } from "./accessToken";
+
 export const fetchCategories = async () => {
   try {
     const response = await fetch(
       "https://api.blog.redberryinternship.ge/api/categories",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     );
 
     if (!response.ok) {
