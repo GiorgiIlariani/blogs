@@ -33,7 +33,7 @@ const EachBlog = ({
           0,
           50
         )}${title.length > 50 ? "..." : ""}`}</h3>
-        <div className="w-full flex items-center gap-4 flex-wrap">
+        <div className="w-full flex items-center gap-[10px] flex-wrap">
           {categories.map((category) => (
             <Button
               type="button"
