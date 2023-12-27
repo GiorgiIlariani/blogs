@@ -8,11 +8,7 @@ import CategoriesList from "./categories";
 import FetchBlogsLoading from "../loadings/fetchAllBlogsLoading";
 import { fetchCategories } from "@/lib/actions/fetchCategories";
 
-type BlogsProps = {
-  // categories: CategoryTypes[];
-};
-
-const MainContent: React.FC<BlogsProps> = () => {
+const MainContent = () => {
   const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
   const [categories, setCategories] = useState<CategoryTypes[]>([]);
   const [blogs, setBlogs] = useState<BlogsTypes[]>([]);
