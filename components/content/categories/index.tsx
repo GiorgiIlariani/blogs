@@ -3,10 +3,8 @@
 import { CategoryTypes } from "@/types";
 import React, { Dispatch, SetStateAction } from "react";
 import Button from "../../UI/Button";
-import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
-import "swiper/css";
+import { useRef } from "react";
+import { useDraggable } from "react-use-draggable-scroll";
 
 type CategoriesProps = {
   categories: CategoryTypes[];
@@ -18,6 +16,10 @@ const CategoriesList = ({
   selectedCategories,
   setSelectedCategories,
 }: CategoriesProps) => {
+  const ref =
+    useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>;
+  const { events } = useDraggable(ref);
+
   const handleCategoryClick = (index: number) => {
     const valueToAdd = index + 1;
 
@@ -33,34 +35,25 @@ const CategoriesList = ({
   };
 
   return (
-    <div className="max-w-[670px] mx-auto flex items-center gap-[10px]">
-      <Swiper
-        mousewheel
-        direction="horizontal"
-        className="mySwiper no-scrollbar"
-        slidesPerView={"auto"}
-        spaceBetween={10}
-        pagination={false}
-        style={{ overflowX: "scroll" }}>
-        {categories.map(
-          ({ title, text_color, id, background_color }, index) => (
-            <SwiperSlide key={id} style={{ width: "auto" }}>
-              <Button
-                onClick={() => handleCategoryClick(index)}
-                text={title}
-                style={{
-                  color: text_color,
-                  backgroundColor: background_color,
-                  border: selectedCategories.includes(index + 1)
-                    ? "1px solid #000000"
-                    : "1px solid transparent",
-                }}
-                className=""
-              />
-            </SwiperSlide>
-          )
-        )}
-      </Swiper>
+    <div
+      className="max-w-[670px] mx-auto flex items-center gap-[10px] overflow-x-scroll no-scrollbar whitespace-nowrap"
+      {...events}
+      ref={ref}>
+      {categories.map(({ title, text_color, id, background_color }, index) => (
+        <Button
+          key={id}
+          onClick={() => handleCategoryClick(index)}
+          text={title}
+          style={{
+            color: text_color,
+            backgroundColor: background_color,
+            border: selectedCategories.includes(index + 1)
+              ? "1px solid #000000"
+              : "1px solid transparent",
+          }}
+          className=""
+        />
+      ))}
     </div>
   );
 };
