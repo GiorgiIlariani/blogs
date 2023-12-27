@@ -6,7 +6,7 @@ import { fetchCategories } from "@/lib/actions/fetchCategories";
 import { revalidatePath } from "next/cache";
 
 const Page = async () => {
-  // const categories = await fetchCategories();
+  const categories = await fetchCategories();
 
   revalidatePath("/");
 
