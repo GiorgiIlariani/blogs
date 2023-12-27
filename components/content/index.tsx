@@ -6,6 +6,7 @@ import { fetchBlogs } from "@/lib/actions/fetchBlogs";
 import { useEffect, useState } from "react";
 import CategoriesList from "./categories";
 import FetchBlogsLoading from "../loadings/fetchAllBlogsLoading";
+import { fetchCategories } from "@/lib/actions/fetchCategories";
 
 type BlogsProps = {
   // categories: CategoryTypes[];
@@ -13,33 +14,35 @@ type BlogsProps = {
 
 const MainContent: React.FC<BlogsProps> = () => {
   const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
+  const [categories, setCategories] = useState<CategoryTypes[]>([]);
   const [blogs, setBlogs] = useState<BlogsTypes[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchContent = async () => {
       try {
         setIsLoading(true);
         const data = await fetchBlogs(selectedCategories);
+        const categories = await fetchCategories();
 
         setBlogs(data);
+        setCategories(categories);
       } catch (error) {
-        console.error("Error fetching blogs:", error);
+        console.error("Error fetching content:", error);
       } finally {
         setIsLoading(false);
       }
     };
-
-    fetchData();
+    fetchContent();
   }, [selectedCategories]);
 
   return (
     <>
-      {/* <CategoriesList
+      <CategoriesList
         categories={categories}
         selectedCategories={selectedCategories}
         setSelectedCategories={setSelectedCategories}
-      /> */}
+      />
       {isLoading ? <FetchBlogsLoading /> : <BlogsList filteredBlogs={blogs} />}
     </>
   );
