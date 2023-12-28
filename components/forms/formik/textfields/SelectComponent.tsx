@@ -95,6 +95,8 @@ const SelectComponent = (props: SelectComponentProps) => {
   const hasError = isTouched && field.value.length === 0;
   const isValid = field.value.length > 0;
 
+  console.log(field.value);
+
   return (
     <div className="flex flex-col gap-[10px] w-full relative">
       <h3 className="font-semibold text-base">{label}</h3>

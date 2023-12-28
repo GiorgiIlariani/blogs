@@ -8,9 +8,9 @@ import CategoriesList from "./categories";
 import FetchBlogsLoading from "../loadings/fetchAllBlogsLoading";
 import { fetchCategories } from "@/lib/actions/fetchCategories";
 
-const MainContent = () => {
+const MainContent = ({ categories }: { categories: CategoryTypes[] }) => {
   const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
-  const [categories, setCategories] = useState<CategoryTypes[]>([]);
+  // const [categories, setCategories] = useState<CategoryTypes[]>([]);
   const [blogs, setBlogs] = useState<BlogsTypes[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -19,10 +19,10 @@ const MainContent = () => {
       try {
         setIsLoading(true);
         const data = await fetchBlogs(selectedCategories);
-        const categories = await fetchCategories();
+        // const categories = await fetchCategories();
 
         setBlogs(data);
-        setCategories(categories);
+        // setCategories(categories);
       } catch (error) {
         console.error("Error fetching content:", error);
       } finally {

@@ -29,8 +29,6 @@ export default function Modal({
     setValue(enteredEmail);
   };
 
-  const handleBlur = () => setTouched(true);
-
   const handleSubmit = async () => {
     if (isAuthorizationSuccessful) closeModal();
 
@@ -40,6 +38,8 @@ export default function Modal({
     setIsAuthorizationSuccessful!(isAuthorized);
     typeof window !== "undefined" &&
       sessionStorage.setItem("isAuthorized", "true");
+
+    setValue("");
   };
 
   const handleFormSubmited = () => router.push("/");
@@ -55,7 +55,6 @@ export default function Modal({
       isAuthorizationSuccessful={isAuthorizationSuccessful}
       touched={touched}
       handleChange={handleChange}
-      handleBlur={handleBlur}
     />
   );
 

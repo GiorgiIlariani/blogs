@@ -7,7 +7,6 @@ type AuthorizationContentProps = {
   isAuthorizationSuccessful?: boolean;
   touched: boolean;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleBlur: () => void;
 };
 
 const AuthorizationContent: React.FC<AuthorizationContentProps> = ({
@@ -15,7 +14,6 @@ const AuthorizationContent: React.FC<AuthorizationContentProps> = ({
   isAuthorizationSuccessful,
   touched,
   handleChange,
-  handleBlur,
 }) => {
   return (
     <>
@@ -36,7 +34,7 @@ const AuthorizationContent: React.FC<AuthorizationContentProps> = ({
           } outline-none`}
           value={value}
           onChange={handleChange}
-          onBlur={handleBlur}
+          // onBlur={handleBlur}
         />
         {!isAuthorizationSuccessful && touched ? (
           <div className="flex items-center gap-3">
