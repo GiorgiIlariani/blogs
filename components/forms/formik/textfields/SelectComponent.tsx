@@ -9,10 +9,9 @@ import Button from "@/components/UI/Button";
 import { IoIosClose } from "react-icons/io";
 
 const SelectComponent = (props: SelectComponentProps) => {
-  const { name, label, placeholder, setFieldValue } = props;
+  const { name, label, placeholder, setFieldValue, categories } = props;
 
   const [field] = useField(name);
-  const [categories, setCategories] = useState<CategoryTypes[]>([]);
   const [selectedCategories, setSelectedCategories] = useState<CategoryTypes[]>(
     (typeof window !== "undefined" &&
       JSON.parse(sessionStorage.getItem(name)!)) ||
@@ -47,19 +46,6 @@ const SelectComponent = (props: SelectComponentProps) => {
   useEffect(() => {
     sessionStorage.setItem(name, JSON.stringify(field.value));
   }, [field.value, name]);
-
-  useEffect(() => {
-    const fetchAllCategories = async () => {
-      try {
-        const categories = await fetchCategories();
-
-        setCategories(categories);
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-      }
-    };
-    fetchAllCategories();
-  }, []);
 
   const handleCategories = (category: CategoryTypes) => {
     const exists = selectedCategories.some(
@@ -144,7 +130,7 @@ const SelectComponent = (props: SelectComponentProps) => {
       </div>
       {showOptions && (
         <div className="w-full max-h-[144px] flex flex-wrap gap-2 border border-[#e4e3eb] rounded-[12px] p-[10px] overflow-y-scroll absolute top-20 bg-white categories-div">
-          {categories.map((item) => (
+          {categories?.map((item) => (
             <Button
               text={item.title}
               key={item.id}

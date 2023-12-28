@@ -1,7 +1,7 @@
 import Content from "@/components/content";
 import Header from "@/components/shared/Header";
 import Hero from "@/components/shared/Hero";
-import { fetchCategories } from "@/lib/actions/fetchCategories";
+import { fetchBlogs } from "@/lib/actions/fetchBlogs";
 
 async function Page({
   searchParams,
@@ -9,7 +9,9 @@ async function Page({
   searchParams: { [key: string]: string | undefined };
 }) {
   const page = searchParams.page ? +searchParams.page : 1;
-  // const categories = await fetchCategories();
+
+  const blogs = await fetchBlogs([]);
+  console.log(blogs);
 
   return (
     <div className="min-h-screen">

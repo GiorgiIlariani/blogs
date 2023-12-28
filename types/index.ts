@@ -49,6 +49,7 @@ export type FormControlProps = {
   info?: string[] | string;
   minRows?: number;
   setFieldValue?: Function;
+  categories?: CategoryTypes[];
 }
 
 export type DatePickerProps =  {
@@ -71,6 +72,7 @@ export type  SelectComponentProps = {
   label: string;
   placeholder?: string;
   setFieldValue?: Function;
+  categories?: CategoryTypes[];
 }
 
 export type ImageComponentProps = {

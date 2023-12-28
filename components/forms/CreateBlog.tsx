@@ -6,13 +6,13 @@ import { convertImageToBlob } from "@/utils";
 import Modal from "../shared/modal";
 import { initialValues } from "./formik/initialValues";
 import Button from "../UI/Button";
-import { FormikValues } from "@/types";
+import { CategoryTypes, FormikValues } from "@/types";
 import { postCategories } from "@/lib/actions/postCategories";
 import FormControl from "./formik/FormControl";
 import { validationSchema } from "./formik/validation";
 import ImageComponent from "./formik/textfields/imageComponent";
 
-const CreateBlogForm = () => {
+const CreateBlogForm = ({ categories }: { categories: CategoryTypes[] }) => {
   const [openModal, setOpenModal] = useState(false);
   const [imageTouched, setImageTouched] = useState(false);
 
@@ -162,6 +162,7 @@ const CreateBlogForm = () => {
                       name="categories"
                       label="კატეგორია"
                       placeholder="აირჩიეთ კატეგორია"
+                      categories={categories}
                     />
                   </div>
                   {/* მეილი */}
