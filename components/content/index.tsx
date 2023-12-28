@@ -21,7 +21,6 @@ const MainContent = ({ page }: { page: number }) => {
     const fetchCategoriesData = async () => {
       try {
         const categories = await fetchCategories();
-
         setCategories(categories);
       } catch (error) {
         console.error("Error fetching content:", error);
@@ -54,15 +53,23 @@ const MainContent = ({ page }: { page: number }) => {
         selectedCategories={selectedCategories}
         setSelectedCategories={setSelectedCategories}
       />
-      {isLoading ? <FetchBlogsLoading /> : <BlogsList filteredBlogs={blogs} />}
-      <div className="w-full my-10 flex items-center justify-center">
-        <PaginationComponent
-          isNext={isNext || false}
-          pageNumber={page || 1}
-          totalCounts={allBlogs}
-          path="/"
-        />
-      </div>
+      {isLoading ? (
+        <FetchBlogsLoading />
+      ) : (
+        <>
+          <BlogsList filteredBlogs={blogs} />
+          {blogs.length > 0 && (
+            <div className="w-full my-10 flex items-center justify-center">
+              <PaginationComponent
+                isNext={isNext || false}
+                pageNumber={page || 1}
+                totalCounts={allBlogs}
+                path="/"
+              />
+            </div>
+          )}
+        </>
+      )}
     </>
   );
 };
