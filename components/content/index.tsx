@@ -8,7 +8,7 @@ import CategoriesList from "./categories";
 import FetchBlogsLoading from "../loadings/fetchAllBlogsLoading";
 import { fetchCategories } from "@/lib/actions/fetchCategories";
 
-const MainContent = () => {
+const MainContent = ({ page }: { page: number }) => {
   const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
   const [categories, setCategories] = useState<CategoryTypes[]>([]);
   const [blogs, setBlogs] = useState<BlogsTypes[]>([]);
