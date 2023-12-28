@@ -35,7 +35,7 @@ export const fetchBlogs = async (categories: number[], page: number, pageSize = 
     // Calculate isNext similar to fetchAllNews
     const isNext = totalBlogs > endIndex;
 
-    return { blogs: paginatedData, isNext, allDocument: data.length };
+    return { blogs: paginatedData, isNext, allDocument: filteredData.length };
   } catch (error) {
     console.error("Error fetching blogs:", error);
     throw error;

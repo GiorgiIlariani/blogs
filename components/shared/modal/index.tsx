@@ -44,7 +44,11 @@ export default function Modal({
     }
   };
 
-  const handleFormSubmited = () => router.push("/");
+  const handleFormSubmited = () => {
+    router.push("/");
+    if (typeof window !== "undefined") sessionStorage.clear();
+    sessionStorage.setItem("isAuthorized", "true");
+  };
 
   // Content based on authorization success
   const modalContent = blogAddedSuccessfully ? (

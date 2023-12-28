@@ -42,7 +42,6 @@ const Page = () => {
             alt="redberry logo"
             width={150}
             height={24}
-            className="cursor-pointer"
           />
         </header>
         <div className="w-full px-4">

@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SelectComponentProps, CategoryTypes } from "@/types";
 import { useField } from "formik";
-import { fetchCategories } from "@/lib/actions/fetchCategories";
 import { IoIosArrowDown } from "react-icons/io";
 import Button from "@/components/UI/Button";
 import { IoIosClose } from "react-icons/io";
@@ -68,6 +67,7 @@ const SelectComponent = (props: SelectComponentProps) => {
     const filteredCategories = selectedCategories.filter(
       (item) => item.id !== id
     );
+
     setFieldValue!(name, filteredCategories);
     setSelectedCategories(filteredCategories);
     setIsCategoryRemoved(true);

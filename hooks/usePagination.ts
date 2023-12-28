@@ -11,22 +11,18 @@ interface UsePaginationOptions {
 }
 
 export const usePagination = ({
-  totalCount, // ანუ სულ რამდენი დოკუმენტია
-  pageSize, // ერთ გვერდზე რამდენი დოკუმენტი უნდა დაეტიოს
-  siblingCount = 1, // რა გვერდზეც ხარ მაგის გარშემო რამდენი ბუთონი უნდა იყოს მააგლითად 15 ხარ ...14,15,16...
-  currentPage, // რომელ გვერდზეც ხარ იმას აჩვენებს
+  totalCount,
+  pageSize,
+  siblingCount = 1, 
+  currentPage,
 }: UsePaginationOptions): PaginationRange => {
   const paginationRange = useMemo<PaginationRange>(() => {
 
-    //  სუ რამდენი გვერდი უნდა იყოს ამას აჩვენებს
     const totalPageCount = Math.ceil(totalCount / pageSize);
     
-
-    // ფეიჯინეიშენზე რამდენი გვერდი უნდა ვაჩვენოთ(6)
-    const totalPageNumbers = siblingCount + 5; //  ჩვენ შემთხვევაში სულ 6ია(თვითონ რომელ გვერდზეც არის, ძმები, 2 წერტილი, პირველი და მეორე)
+    const totalPageNumbers = siblingCount + 5;
 
     
-    // თუ ფეიჯინეიშენზე რამდენი გვერდიც უნდა აჩვენო მეტია ან ტოლია გვერდების რაოდენობაზე
     if (totalPageNumbers >= totalPageCount) {
       return range(1, totalPageCount);
     }
@@ -35,6 +31,7 @@ export const usePagination = ({
     const rightSiblingIndex = Math.min(currentPage + siblingCount, totalPageCount);
 
     const shouldShowLeftDots = leftSiblingIndex > 2;
+    
     const shouldShowRightDots = rightSiblingIndex < totalPageCount - 2;
 
     const firstPageIndex = 1;

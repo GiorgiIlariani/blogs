@@ -52,7 +52,7 @@ function PaginationComponent({ pageNumber, isNext, path, totalCounts }: Props) {
         if (page === "...")
           return (
             <div className="mx-1">
-              <p className=" text-light-1 font-semibold">...</p>
+              <p className=" text-[#5D37F3] font-bold text-xl">...</p>
             </div>
           );
         return (
