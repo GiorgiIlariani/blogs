@@ -21,22 +21,26 @@ const SelectComponent = (props: SelectComponentProps) => {
   const [showOptions, setShowOptions] = useState(false);
   const [isTouched, setIsTouched] = useState(false);
   const [isCategoryRemoved, setIsCategoryRemoved] = useState(false);
-  const selectRefs = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+
+      // Check if the click is outside the SelectComponent
       if (
-        selectRefs.current &&
-        !selectRefs.current.contains(e.target as Node)
+        !target.closest(".select-div") &&
+        !target.closest(".categories-div")
       ) {
         setShowOptions(false);
       }
     };
 
-    window.addEventListener("click", handleClickOutside);
+    // Add event listener when the component mounts
+    document.addEventListener("click", handleClickOutside);
 
+    // Remove event listener when the component unmounts
     return () => {
-      window.removeEventListener("click", handleClickOutside);
+      document.removeEventListener("click", handleClickOutside);
     };
   }, []);
 
@@ -75,34 +79,33 @@ const SelectComponent = (props: SelectComponentProps) => {
   };
 
   const handleCategoryRemove = (id: number) => {
-    const remainingCategories = selectedCategories.filter(
+    const filteredCategories = selectedCategories.filter(
       (item) => item.id !== id
     );
-
-    const remainingCategoriesIds = remainingCategories.map((item) => item.id);
-
+    setFieldValue!(name, filteredCategories);
+    setSelectedCategories(filteredCategories);
     setIsCategoryRemoved(true);
-    setSelectedCategories(remainingCategories);
-    setFieldValue!(name, remainingCategoriesIds);
   };
 
   const handleOptions = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation();
-    setShowOptions((prev) => !prev);
-    setIsTouched(true);
+    // Check if the click target is the remove icon
+    const isRemoveIconClicked =
+      e.target && (e.target as HTMLElement).closest(".remove-icon");
+
+    if (!isRemoveIconClicked) {
+      setShowOptions((prev) => !prev);
+      setIsTouched(true);
+    }
   };
 
   const hasError = isTouched && field.value.length === 0;
   const isValid = field.value.length > 0;
 
-  console.log(field.value);
-
   return (
     <div className="flex flex-col gap-[10px] w-full relative">
       <h3 className="font-semibold text-base">{label}</h3>
       <div
-        ref={selectRefs}
-        className={`w-full h-[44px] rounded-[12px] flex items-center gap-2 overflow-x-hidden overflow-y-hidden text-xs relative px-[10px] cursor-pointer border
+        className={`w-full h-[44px] rounded-[12px] flex items-center gap-2 overflow-x-hidden overflow-y-hidden text-xs relative px-[10px] cursor-pointer border select-div
         ${
           isValid
             ? "border-success"
@@ -122,10 +125,10 @@ const SelectComponent = (props: SelectComponentProps) => {
               backgroundColor: item.background_color,
               color: item.text_color,
             }}
-            className="h-8 py-[6px] px-3 rounded-[30px] text-nowrap cursor-default"
+            className="h-8 py-[6px] px-3 rounded-[30px] text-nowrap"
             endDecorator={
               <div
-                className="text-white text-xl flex items-center justify-center cursor-pointer"
+                className="text-white text-xl flex items-center justify-center cursor-pointer remove-icon"
                 onClick={() => handleCategoryRemove(item.id)}>
                 <IoIosClose />
               </div>
@@ -140,9 +143,7 @@ const SelectComponent = (props: SelectComponentProps) => {
         </div>
       </div>
       {showOptions && (
-        <div
-          className="w-full max-h-[144px] flex flex-wrap gap-2 border border-[#e4e3eb] rounded-[12px] p-[10px] overflow-y-scroll absolute top-20 bg-white"
-          ref={selectRefs}>
+        <div className="w-full max-h-[144px] flex flex-wrap gap-2 border border-[#e4e3eb] rounded-[12px] p-[10px] overflow-y-scroll absolute top-20 bg-white categories-div">
           {categories.map((item) => (
             <Button
               text={item.title}

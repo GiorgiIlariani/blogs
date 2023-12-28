@@ -30,16 +30,18 @@ export default function Modal({
   };
 
   const handleSubmit = async () => {
-    if (isAuthorizationSuccessful) closeModal();
+    if (isAuthorizationSuccessful) {
+      closeModal();
+      setValue("");
+      setTouched(false);
+    } else {
+      const isAuthorized = await authenticateUser(value);
 
-    setTouched(true);
-
-    const isAuthorized = await authenticateUser(value);
-    setIsAuthorizationSuccessful!(isAuthorized);
-    typeof window !== "undefined" &&
-      sessionStorage.setItem("isAuthorized", "true");
-
-    setValue("");
+      setIsAuthorizationSuccessful!(isAuthorized);
+      typeof window !== "undefined" &&
+        sessionStorage.setItem("isAuthorized", "true");
+      setTouched(true);
+    }
   };
 
   const handleFormSubmited = () => router.push("/");
@@ -52,7 +54,6 @@ export default function Modal({
   ) : (
     <AuthorizationContent
       value={value}
-      isAuthorizationSuccessful={isAuthorizationSuccessful}
       touched={touched}
       handleChange={handleChange}
     />
