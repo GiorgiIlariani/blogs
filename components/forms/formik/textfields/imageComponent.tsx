@@ -27,7 +27,9 @@ const ImageComponent: React.FC<ImageComponentProps> = ({
       {!image ? (
         <div
           className={`relative w-full h-[180px] bg-[#F4F3FF] rounded-lg border-dashed border overflow-hidden mt-4 ${
-            imageTouched && image ? "text-warning border-warning" : ""
+            imageTouched && image
+              ? "text-warning border-warning bg-warning-background"
+              : ""
           }`}>
           <label htmlFor="image" className="cursor-pointer">
             <input

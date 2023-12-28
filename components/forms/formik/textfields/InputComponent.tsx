@@ -108,7 +108,7 @@ const InputComponent: React.FC<InputProps> = (props) => {
         placeholder={placeholder}
         className={`rounded-[12px] mt-[10px] bg-[#FFFFFF] w-full px-4 py-[10px] border-[2px] focus:border-[#5D37F3] outline-none ${
           hasError
-            ? "border border-warning"
+            ? "border border-warning bg-warning-background"
             : field.value.length >= 4
             ? "border border-success"
             : ""

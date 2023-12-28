@@ -11,7 +11,8 @@ const config: Config = {
       colors: {
          "light-1": "#FFFFFF",
          "success": '#14D81C',
-         'warning': '#EA1919'
+         'warning': '#EA1919',
+         "warning-background": '#FAF2F3',
       },
       screens: {
       "2xl": { max: "1536px" },

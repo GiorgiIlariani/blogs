@@ -18,7 +18,6 @@ const SelectComponent = (props: SelectComponentProps) => {
   );
   const [showOptions, setShowOptions] = useState(false);
   const [isTouched, setIsTouched] = useState(false);
-  const [isCategoryRemoved, setIsCategoryRemoved] = useState(false);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -47,6 +46,8 @@ const SelectComponent = (props: SelectComponentProps) => {
   }, [field.value, name]);
 
   const handleCategories = (category: CategoryTypes) => {
+    console.log(selectedCategories);
+
     const exists = selectedCategories.some(
       (selectedCategory) => selectedCategory.id === category.id
     );
@@ -58,7 +59,7 @@ const SelectComponent = (props: SelectComponentProps) => {
       ]);
     }
 
-    if (!field.value.includes(category.id)) {
+    if (!field.value.includes(category)) {
       setFieldValue!(name, [...field.value, category]);
     }
   };
@@ -70,7 +71,6 @@ const SelectComponent = (props: SelectComponentProps) => {
 
     setFieldValue!(name, filteredCategories);
     setSelectedCategories(filteredCategories);
-    setIsCategoryRemoved(true);
   };
 
   const handleOptions = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -95,8 +95,8 @@ const SelectComponent = (props: SelectComponentProps) => {
         ${
           isValid
             ? "border-success"
-            : hasError && isCategoryRemoved
-            ? "border-warning"
+            : hasError
+            ? "border-warning bg-warning-background"
             : isTouched && !isValid && showOptions
             ? "border-[#5D37F3]"
             : ""
@@ -124,8 +124,11 @@ const SelectComponent = (props: SelectComponentProps) => {
         {field.value.length === 0 ? (
           <p className="text-[#85858D] text-sm">{placeholder}</p>
         ) : null}
-        <div className="absolute h-full right-0 px-[10px] py-0 bg-white flex items-center justify-center">
-          <IoIosArrowDown className="w-6 h-6 cursor-pointer text-sm" />
+        <div
+          className={`bg-white h-full ${
+            hasError ? "bg-warning-background" : ""
+          } absolute right-0 px-[10px] py-0 flex items-center justify-center`}>
+          <IoIosArrowDown className="w-4 h-6 cursor-pointer text-sm" />
         </div>
       </div>
       {showOptions && (

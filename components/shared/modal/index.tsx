@@ -36,7 +36,6 @@ export default function Modal({
       setTouched(false);
     } else {
       const isAuthorized = await authenticateUser(value);
-
       setIsAuthorizationSuccessful!(isAuthorized);
       typeof window !== "undefined" &&
         sessionStorage.setItem("isAuthorized", "true");

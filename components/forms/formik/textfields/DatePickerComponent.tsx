@@ -28,9 +28,9 @@ const DatePickerComponent: React.FC<DatePickerProps> = ({
       <input
         className={`${
           hasError
-            ? "border border-warning text-warning"
+            ? "border-warning text-warning bg-warning-background"
             : field.value !== ""
-            ? "border border-success text-success"
+            ? "border-success text-success"
             : ""
         } w-full px-4 py-5 text-lg bg-transparent mt-2 rounded-xl bg-[#FFFFFF] h-11 border-[2px] focus:border-[#5D37F3] outline-none`}
         type="date"
