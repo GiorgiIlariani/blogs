@@ -9,8 +9,7 @@ async function Page({
   searchParams: { [key: string]: string | undefined };
 }) {
   const page = searchParams.page ? +searchParams.page : 1;
-  const categories = await fetchCategories();
-  console.log(categories);
+  // const categories = await fetchCategories();
 
   return (
     <div className="min-h-screen">
