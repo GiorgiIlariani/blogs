@@ -1,7 +1,6 @@
 import Content from "@/components/content";
 import Header from "@/components/shared/Header";
 import Hero from "@/components/shared/Hero";
-import { fetchBlogs } from "@/lib/actions/fetchBlogs";
 
 async function Page({
   searchParams,

@@ -180,7 +180,9 @@ const CreateBlogForm = ({ categories }: { categories: CategoryTypes[] }) => {
                   <Button
                     type="submit"
                     className={`w-[288px] h-[40px] bg-[#5D37F3] ${
-                      !isFormValid ? "bg-[#E4E3EB] hover:bg-[#E4E3EB]" : ""
+                      !isFormValid || isSubmitting
+                        ? "bg-[#E4E3EB] hover:bg-[#E4E3EB]"
+                        : ""
                     } hover:bg-[#5D37F3] text-[#FFFFFF] font-normal rounded-[8px]`}
                     disabled={!isFormValid || isSubmitting}
                     text={isSubmitting ? "იტვირთება..." : "გამოქვეყნება"}

@@ -8,13 +8,13 @@ import BackBtn from "@/components/UI/BackBtn";
 
 const Page = async ({ params }: { params: { id: string } }) => {
   const blogDetails = await fetchEachBlog(Number(params.id));
-  const blogs = await fetchBlogs([]);
+  const data = await fetchBlogs([], 1);
 
   const { title, description, image, publish_date, categories, author, email } =
     blogDetails;
 
   // Filter out the current blog from the list of similar blogs
-  const filteredSimilarBlogs = blogs.filter(
+  const filteredSimilarBlogs = data.blogs.filter(
     (blog: BlogsTypes) =>
       blog.id !== Number(params.id) && // Exclude the current blog
       blog.categories.some((category) =>
