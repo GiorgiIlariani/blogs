@@ -10,9 +10,6 @@ async function Page({
 }) {
   const page = searchParams.page ? +searchParams.page : 1;
 
-  const blogs = await fetchBlogs([]);
-  console.log(blogs);
-
   return (
     <div className="min-h-screen">
       <Header />
