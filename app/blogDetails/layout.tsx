@@ -1,7 +1,6 @@
 import BlogDetailsLoading from "@/components/loadings/blogDetailsLoading";
 import Header from "@/components/shared/Header";
 import { Suspense } from "react";
-export const revalidate = 0;
 
 export default function BlogDetailsLayout({
   children,
