@@ -8,18 +8,18 @@ import BackBtn from "@/components/UI/BackBtn";
 
 const Page = async ({ params }: { params: { id: string } }) => {
   const blogDetails = await fetchEachBlog(Number(params.id));
-  // const data = await fetchBlogs([], 1);
+  const data = await fetchBlogs([], 1);
 
   const { title, description, image, publish_date, categories, author, email } =
     blogDetails;
 
-  // const filteredSimilarBlogs = data.data.filter(
-  //   (blog: BlogsTypes) =>
-  //     blog.id !== Number(params.id) && // Exclude the current blog
-  //     blog.categories.some((category) =>
-  //       categories.some((c: CategoryTypes) => c.id === category.id)
-  //     )
-  // );
+  const filteredSimilarBlogs = data.data.filter(
+    (blog: BlogsTypes) =>
+      blog.id !== Number(params.id) && // Exclude the current blog
+      blog.categories.some((category) =>
+        categories.some((c: CategoryTypes) => c.id === category.id)
+      )
+  );
 
   return (
     <>
@@ -37,7 +37,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
           />
         </div>
         <div className="w-full px-4">
-          {/* <SimilarBlogs similarBlogs={filteredSimilarBlogs} /> */}
+          <SimilarBlogs similarBlogs={filteredSimilarBlogs} />
         </div>
       </div>
     </>
