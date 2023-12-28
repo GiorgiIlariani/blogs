@@ -6,6 +6,7 @@ import { fetchBlogs } from "@/lib/actions/fetchBlogs";
 import { useEffect, useState } from "react";
 import CategoriesList from "./categories";
 import FetchBlogsLoading from "../loadings/fetchAllBlogsLoading";
+import { fetchCategories } from "@/lib/actions/fetchCategories";
 
 const MainContent = () => {
   const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
@@ -14,16 +15,16 @@ const MainContent = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const fetchCategories = async () => {
+    const fetchCategoriesData = async () => {
       try {
-        const data = await fetchBlogs(selectedCategories);
+        const categories = await fetchCategories();
 
-        setCategories(data);
+        setCategories(categories);
       } catch (error) {
         console.error("Error fetching content:", error);
       }
     };
-    fetchCategories();
+    fetchCategoriesData();
   }, []);
 
   useEffect(() => {
