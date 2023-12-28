@@ -62,16 +62,14 @@ const CreateBlogForm = ({ categories }: { categories: CategoryTypes[] }) => {
         email: values.email,
       });
 
-      console.log(response);
+      if (response) {
+        setOpenModal(true);
 
-      // if (response) {
-      //   setOpenModal(true);
+        formikHelpers.resetForm();
 
-      //   formikHelpers.resetForm();
-
-      //   if (typeof window !== "undefined") sessionStorage.clear();
-      //   sessionStorage.setItem("isAuthorized", "true");
-      // }
+        if (typeof window !== "undefined") sessionStorage.clear();
+        sessionStorage.setItem("isAuthorized", "true");
+      }
     } catch (error) {
       console.error("Error submitting form:", error);
     }
