@@ -8,7 +8,7 @@ import BackBtn from "@/components/UI/BackBtn";
 
 const Page = async ({ params }: { params: { id: string } }) => {
   // const blogDetails = await fetchEachBlog(Number(params.id));
-  // const data = await fetchBlogs([], 1);
+  const data = await fetchBlogs([], 1);
 
   // const { title, description, image, publish_date, categories, author, email } =
   //   blogDetails;

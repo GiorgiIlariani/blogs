@@ -42,7 +42,7 @@ const BlogDetails: React.FC<BlogDetailsProps> = async ({
             {title}
           </h1>
           <div className="w-full flex items-center flex-wrap gap-2">
-            {categories.map((category: CategoryTypes) => (
+            {categories?.map((category: CategoryTypes) => (
               <Button
                 key={category.id}
                 className="rounded-[30px] cursor-default"
