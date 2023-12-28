@@ -15,6 +15,7 @@ import ImageComponent from "./formik/textfields/imageComponent";
 const CreateBlogForm = ({ categories }: { categories: CategoryTypes[] }) => {
   const [openModal, setOpenModal] = useState(false);
   const [imageTouched, setImageTouched] = useState(false);
+  const [isImageSizeBig, setIsImageSizeBig] = useState(false);
 
   const handleFileSelect = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -29,7 +30,11 @@ const CreateBlogForm = ({ categories }: { categories: CategoryTypes[] }) => {
         const result = reader.result;
 
         if (result && typeof result === "string") {
-          setFieldValue("image", { name: file.name, url: result });
+          setFieldValue("image", {
+            name: file.name,
+            url: result,
+            size: file.size,
+          });
         } else {
           console.error("FileReader result is not a string.");
         }
@@ -85,10 +90,8 @@ const CreateBlogForm = ({ categories }: { categories: CategoryTypes[] }) => {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmit}>
-        {({ setFieldValue, isValid, values, isSubmitting }) => {
+        {({ setFieldValue, isValid, values, isSubmitting, errors }) => {
           const isFormValid = isValid && values.categories.length > 0;
-
-          console.log(values);
 
           return (
             <Form
@@ -104,6 +107,7 @@ const CreateBlogForm = ({ categories }: { categories: CategoryTypes[] }) => {
                 handleFileSelect={handleFileSelect}
                 setFieldValue={setFieldValue}
                 handleImageRemove={handleImageRemove}
+                hasError={errors.image}
               />
               <div className="w-full flex flex-col gap-8 mt-5">
                 <div className="flex items-start sm:flex-col gap-6">

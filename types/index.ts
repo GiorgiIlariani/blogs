@@ -29,6 +29,7 @@ export type BlogsTypes = {
 interface ImageType {
   name: string;
   url: string;
+  size: string;
 }
 
 export type FormikValues = {
@@ -81,4 +82,5 @@ export type ImageComponentProps = {
   setFieldValue: any;
   handleImageRemove: any;
   name: any;
+  hasError: any;
 }

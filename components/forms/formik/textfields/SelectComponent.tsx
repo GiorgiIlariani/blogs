@@ -23,7 +23,6 @@ const SelectComponent = (props: SelectComponentProps) => {
     const handleClickOutside = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
 
-      // Check if the click is outside the SelectComponent
       if (
         !target.closest(".select-div") &&
         !target.closest(".categories-div")
@@ -128,7 +127,7 @@ const SelectComponent = (props: SelectComponentProps) => {
           className={`bg-white h-full ${
             hasError ? "bg-warning-background" : ""
           } absolute right-0 px-[10px] py-0 flex items-center justify-center`}>
-          <IoIosArrowDown className="w-4 h-6 cursor-pointer text-sm" />
+          <IoIosArrowDown className="w-5 h-6 cursor-pointer text-sm" />
         </div>
       </div>
       {showOptions && (

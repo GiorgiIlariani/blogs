@@ -51,13 +51,13 @@ function PaginationComponent({ pageNumber, isNext, path, totalCounts }: Props) {
       {pagination.map((page, index) => {
         if (page === "...")
           return (
-            <div className="mx-1">
+            <div className="mx-1" key={index}>
               <p className=" text-[#5D37F3] font-bold text-xl">...</p>
             </div>
           );
         return (
           <Button
-            key={page}
+            key={index}
             text={String(page)}
             type="button"
             className="text-light-1 cursor-pointer border min-w-[40px] py-[7px] xs:py-[5px] rounded-[4px] px-3 xs:px-[6px] bg-gray-400 "

@@ -6,6 +6,8 @@ const patterns = {
   email: /^[a-zA-Z\d\.-]+@redberry\.ge$/,
 };
 
+const MAX_IMAGE_SIZE_MB = 1;
+
 export const validationSchema = Yup.object().shape({
   author: Yup.string()
     .matches(
@@ -29,6 +31,18 @@ export const validationSchema = Yup.object().shape({
   image: Yup.object().shape({
     name: Yup.string().required('Image name is required'),
     url: Yup.mixed().required('Image URL is required'),
+    size: Yup.mixed().test('file-size', 'Image size must be less than 1 MB', function (value) {      
+      if (!value) return true; // Allow for empty value
+
+      const castedValue = value as { size?: number }; // Explicitly cast to include the 'size' property
+      
+      if (!castedValue) return false; // Invalid size
+      
+
+      const fileSizeInMB = Number(castedValue) / 1024 / 1024; // Convert to MB
+
+      return fileSizeInMB <= MAX_IMAGE_SIZE_MB;
+    }),
   }).required("გთხოვთ ატვირთოთ თქვენი ფოტო!"),
   email: Yup.string().test(
       "is-valid-email",

@@ -9,6 +9,7 @@ const ImageComponent: React.FC<ImageComponentProps> = ({
   setFieldValue,
   handleImageRemove,
   name,
+  hasError,
 }) => {
   const [field] = useField(name);
 
@@ -25,12 +26,7 @@ const ImageComponent: React.FC<ImageComponentProps> = ({
     <div className="mt-5">
       <label className="font-semibold">ატვირთეთ ფოტო</label>
       {!image ? (
-        <div
-          className={`relative w-full h-[180px] bg-[#F4F3FF] rounded-lg border-dashed border overflow-hidden mt-4 ${
-            imageTouched && image
-              ? "text-warning border-warning bg-warning-background"
-              : ""
-          }`}>
+        <div className="relative w-full h-[180px] bg-[#F4F3FF] rounded-lg border-dashed border overflow-hidden mt-4">
           <label htmlFor="image" className="cursor-pointer">
             <input
               hidden
@@ -62,7 +58,12 @@ const ImageComponent: React.FC<ImageComponentProps> = ({
           </label>
         </div>
       ) : (
-        <div className="relative w-full h-14 bg-[#F2F2FA] rounded-lg mt-4 flex justify-between items-center px-4">
+        <div
+          className={`relative w-full h-14 bg-[#F2F2FA] border rounded-lg mt-4 flex justify-between items-center px-4 ${
+            imageTouched && hasError
+              ? "border-warning bg-warning-background"
+              : ""
+          }`}>
           <div className="flex gap-2 items-center">
             <Image
               src="/assets/images/gallery.png"

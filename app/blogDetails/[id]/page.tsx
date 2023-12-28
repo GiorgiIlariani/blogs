@@ -14,7 +14,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
     blogDetails;
 
   // Filter out the current blog from the list of similar blogs
-  const filteredSimilarBlogs = data.blogs.filter(
+  const filteredSimilarBlogs = data.data.filter(
     (blog: BlogsTypes) =>
       blog.id !== Number(params.id) && // Exclude the current blog
       blog.categories.some((category) =>
