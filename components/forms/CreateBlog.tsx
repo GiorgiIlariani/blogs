@@ -67,7 +67,10 @@ const CreateBlogForm = ({ categories }: { categories: CategoryTypes[] }) => {
 
         formikHelpers.resetForm();
 
-        if (typeof window !== "undefined") sessionStorage.clear();
+        if (typeof window !== "undefined") {
+          sessionStorage.clear();
+          console.log("session storage cleared");
+        }
         sessionStorage.setItem("isAuthorized", "true");
       }
     } catch (error) {
