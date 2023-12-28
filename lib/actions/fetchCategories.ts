@@ -5,6 +5,7 @@ export const fetchCategories = async () => {
     const response = await fetch(
       "https://api.blog.redberryinternship.ge/api/categories",
       {
+        cache: 'no-store',
         headers: {
           Authorization: `Bearer ${token}`,
         },
