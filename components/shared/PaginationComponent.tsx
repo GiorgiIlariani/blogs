@@ -40,11 +40,11 @@ function PaginationComponent({ pageNumber, isNext, path, totalCounts }: Props) {
   };
 
   return (
-    <div className="flex w-full items-center justify-center gap-1">
+    <div className="flex w-full items-center justify-center gap-1 xs:gap-[3px]">
       <Button
         onClick={() => handleNavigation("prev")}
         disabled={pageNumber === 1}
-        className={`text-light-1 cursor-pointer border border-[#5D37F3] min-w-[40px] py-[7px] bg-[#5D37F3] rounded-[4px] px-3`}
+        className="text-light-1 cursor-pointer border border-[#5D37F3] min-w-[40px] py-[7px] bg-[#5D37F3] rounded-[4px] px-3 xs:px-[6px] xs:text-sm"
         text="Prev"
       />
 
@@ -60,7 +60,7 @@ function PaginationComponent({ pageNumber, isNext, path, totalCounts }: Props) {
             key={page}
             text={String(page)}
             type="button"
-            className={`text-light-1 cursor-pointer border min-w-[40px] py-[7px] rounded-[4px] px-3 bg-gray-400`}
+            className="text-light-1 cursor-pointer border min-w-[40px] py-[7px] xs:py-[5px] rounded-[4px] px-3 xs:px-[6px] bg-gray-400 "
             onClick={() => handleNavigation("button", page)}
             style={{
               backgroundColor: page === pageNumber ? "#5D37F3" : "",
@@ -72,7 +72,7 @@ function PaginationComponent({ pageNumber, isNext, path, totalCounts }: Props) {
       <Button
         onClick={() => handleNavigation("next")}
         disabled={!isNext}
-        className={`text-light-1 cursor-pointer border border-[#5D37F3] min-w-[40px] py-[7px] bg-[#5D37F3] rounded-[4px] px-3`}
+        className="text-light-1 cursor-pointer border border-[#5D37F3] min-w-[40px] py-[7px] bg-[#5D37F3] rounded-[4px] px-3 xs:px-[6px] xs:text-sm"
         text="Next"
       />
     </div>

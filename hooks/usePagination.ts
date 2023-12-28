@@ -40,7 +40,6 @@ export const usePagination = ({
     if (!shouldShowLeftDots && shouldShowRightDots) {
       let leftItemCount = 3 + 2 * siblingCount;
       let leftRange = range(1, leftItemCount);
-      console.log('1. this if statement is shown');
         
       return [...leftRange, '...', lastPageIndex];
     }
@@ -48,13 +47,11 @@ export const usePagination = ({
     if (shouldShowLeftDots && !shouldShowRightDots) {
       let rightItemCount = 3 + 2 * siblingCount;
       let rightRange = range(totalPageCount - rightItemCount + 1, totalPageCount);
-       console.log('2. this if statement is shown');
       return [firstPageIndex, '...', ...rightRange];
     }
 
     if (shouldShowLeftDots && shouldShowRightDots) {
       let middleRange = range(leftSiblingIndex, rightSiblingIndex);
-       console.log('3. this if statement is shown');
       return [firstPageIndex, '...', ...middleRange, '...', lastPageIndex];
     }
 
