@@ -21,7 +21,9 @@ const BackBtn = ({ backFromFormPage }: { backFromFormPage?: boolean }) => {
         !backFromFormPage
           ? "heroSection:top-[105px] heroSection:left-6 "
           : "heroSection:left-4"
-      } heroSection:top-[24px] left-[76px] lg:left-[50px]  flex items-center justify-center rounded-[24px]`}
+      }  ${
+        backFromFormPage ? "heroSection:top-[24px]" : ""
+      } left-[76px] lg:left-[50px]  flex items-center justify-center rounded-[24px]`}
       onClick={handleClick}>
       <IoIosArrowBack />
     </button>
