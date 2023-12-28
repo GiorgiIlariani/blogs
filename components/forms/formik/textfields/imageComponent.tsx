@@ -58,30 +58,37 @@ const ImageComponent: React.FC<ImageComponentProps> = ({
           </label>
         </div>
       ) : (
-        <div
-          className={`relative w-full h-14 bg-[#F2F2FA] border rounded-lg mt-4 flex justify-between items-center px-4 ${
-            imageTouched && hasError
-              ? "border-warning bg-warning-background"
-              : ""
-          }`}>
-          <div className="flex gap-2 items-center">
+        <>
+          <div
+            className={`relative w-full h-14 bg-[#F2F2FA] border rounded-lg mt-4 flex justify-between items-center px-4 ${
+              imageTouched && hasError
+                ? "border-warning bg-warning-background"
+                : ""
+            }`}>
+            <div className="flex gap-2 items-center">
+              <Image
+                src="/assets/images/gallery.png"
+                alt="galery"
+                width={24}
+                height={24}
+              />
+              <p>{field.value.name}</p>
+            </div>
             <Image
-              src="/assets/images/gallery.png"
-              alt="galery"
+              src="/assets/images/close.png"
+              alt="close icon"
               width={24}
               height={24}
+              onClick={() => handleImageRemove(setFieldValue)}
+              className="cursor-pointer"
             />
-            <p>{field.value.name}</p>
           </div>
-          <Image
-            src="/assets/images/close.png"
-            alt="close icon"
-            width={24}
-            height={24}
-            onClick={() => handleImageRemove(setFieldValue)}
-            className="cursor-pointer"
-          />
-        </div>
+          {imageTouched && hasError ? (
+            <p className="text-warning mt-1">image must be less than 1 mb</p>
+          ) : (
+            ""
+          )}
+        </>
       )}
     </div>
   );
