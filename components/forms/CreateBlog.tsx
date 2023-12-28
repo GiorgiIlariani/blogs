@@ -65,11 +65,13 @@ const CreateBlogForm = ({ categories }: { categories: CategoryTypes[] }) => {
       if (response) {
         setOpenModal(true);
 
-        formikHelpers.resetForm();
-
         if (typeof window !== "undefined") {
           sessionStorage.clear();
           console.log("session storage cleared");
+          formikHelpers.resetForm({
+            values,
+            categories: [],
+          });
         }
         sessionStorage.setItem("isAuthorized", "true");
       }
