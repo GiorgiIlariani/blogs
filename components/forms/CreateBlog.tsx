@@ -94,16 +94,8 @@ const CreateBlogForm = ({ categories }: { categories: CategoryTypes[] }) => {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmit}>
-        {({
-          setFieldValue,
-          isValid,
-          values,
-          isSubmitting,
-          errors,
-          submitForm,
-        }) => {
+        {({ setFieldValue, isValid, values, isSubmitting, errors }) => {
           const isFormValid = isValid && values.categories.length > 0;
-
           return (
             <Form
               autoComplete="off"

@@ -17,7 +17,6 @@ const SelectComponent = (props: SelectComponentProps) => {
     isSelectTouched,
     setIsSelectTouched,
   } = props;
-
   const [field] = useField(name);
   const [selectedCategories, setSelectedCategories] = useState<CategoryTypes[]>(
     (typeof window !== "undefined" &&

@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   description: "create as many blogs as you want",
 };
 
+// local font
 const Firago = localFont({
   src: [
     {

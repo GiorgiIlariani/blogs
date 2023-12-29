@@ -11,6 +11,7 @@ type CategoriesProps = {
   selectedCategories: number[];
   setSelectedCategories: Dispatch<SetStateAction<number[]>>;
 };
+
 const CategoriesList = ({
   categories,
   selectedCategories,

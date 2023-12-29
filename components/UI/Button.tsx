@@ -1,14 +1,5 @@
-import React, { CSSProperties, FC, ReactElement } from "react";
-
-interface ButtonProps {
-  onClick?: () => void;
-  type?: "button" | "submit" | "reset";
-  text: string;
-  className?: string;
-  style?: CSSProperties;
-  disabled?: boolean;
-  endDecorator?: React.ReactNode;
-}
+import { ButtonProps } from "@/types";
+import React, { FC, ReactElement } from "react";
 
 const Button: FC<ButtonProps> = ({
   onClick,

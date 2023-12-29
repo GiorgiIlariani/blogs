@@ -10,9 +10,7 @@ import { fetchCategories } from "@/lib/actions/fetchCategories";
 import PaginationComponent from "../shared/PaginationComponent";
 
 const MainContent = ({ page }: { page: number }) => {
-  // const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
   const [selectedCategories, setSelectedCategories] = useState<number[]>(() => {
-    // Retrieve selected categories from sessionStorage on component mount
     const storedCategories =
       typeof window !== "undefined" &&
       sessionStorage.getItem("filteredCategories");

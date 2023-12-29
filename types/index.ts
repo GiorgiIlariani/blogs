@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { CSSProperties, Dispatch, SetStateAction } from "react";
 
 export type ModalProps = {
     isOpen: boolean;
@@ -89,4 +89,21 @@ export type ImageComponentProps = {
   handleImageRemove: (setFieldValue: Function) => void;
   name: string;
   hasError: any;
+}
+
+export interface UsePaginationOptions {
+  totalCount: number;
+  pageSize: number;
+  siblingCount?: number;
+  currentPage: number;
+}
+
+export interface ButtonProps {
+  onClick?: () => void;
+  type?: "button" | "submit" | "reset";
+  text: string;
+  className?: string;
+  style?: CSSProperties;
+  disabled?: boolean;
+  endDecorator?: React.ReactNode;
 }

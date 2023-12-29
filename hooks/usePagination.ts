@@ -1,14 +1,8 @@
+import { UsePaginationOptions } from "@/types";
 import { range } from "@/utils";
 import { useMemo } from "react";
 
 type PaginationRange = (number | '...')[];
-
-interface UsePaginationOptions {
-  totalCount: number;
-  pageSize: number;
-  siblingCount?: number;
-  currentPage: number;
-}
 
 export const usePagination = ({
   totalCount,

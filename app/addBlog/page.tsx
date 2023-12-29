@@ -42,6 +42,7 @@ const Page = () => {
             alt="redberry logo"
             width={150}
             height={24}
+            priority
           />
         </header>
         <div className="w-full px-4">
