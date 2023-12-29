@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 
 const patterns = {
   author: /^[ა-ჰ ]{4,}$/, // Allow space for multiple words
-  title: /^.{4,}$/,
+  title: /^.{2,}$/,
   email: /^[a-zA-Z\d\.-]+@redberry\.ge$/,
 };
 
@@ -26,8 +26,8 @@ export const validationSchema = Yup.object().shape({
     )
     .required("მინიმუმ ოთხი სიმბოლო, ქართული ასოები, მინიმუმ 4 სიტყვა"),
   title: Yup.string()
-    .matches(patterns.title, "მინიმუმ 4 სიმბოლო")
-    .required("მინიმუმ 4 სიმბოლო"),
+    .matches(patterns.title, "მინიმუმ 2 სიმბოლო")
+    .required("მინიმუმ 2 სიმბოლო"),
   image: Yup.object().shape({
     name: Yup.string().required('Image name is required'),
     url: Yup.mixed().required('Image URL is required'),
@@ -57,6 +57,6 @@ export const validationSchema = Yup.object().shape({
           .isValidSync(value);
       }
     ),
-  description: Yup.string().min(4, 'მინიმუმ 4 სიმბოლო').required('მინიმუმ 4 სიმბოლო'),
+  description: Yup.string().min(2, 'მინიმუმ 2 სიმბოლო').required('მინიმუმ 2 სიმბოლო'),
   publish_date: Yup.string().required(),
 });

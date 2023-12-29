@@ -45,6 +45,9 @@ const config: Config = {
       "2xs": { max: "390px" },
       // => @media (max-width: 390px) { ... }
       },
+      fontFamily: {
+        FiraGO: ['var(--font-poppins)']
+      }
     },
   },
   plugins: [],

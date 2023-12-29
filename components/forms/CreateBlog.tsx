@@ -15,7 +15,7 @@ import ImageComponent from "./formik/textfields/imageComponent";
 const CreateBlogForm = ({ categories }: { categories: CategoryTypes[] }) => {
   const [openModal, setOpenModal] = useState(false);
   const [imageTouched, setImageTouched] = useState(false);
-  const [isImageSizeBig, setIsImageSizeBig] = useState(false);
+  const [isSelectTouched, setIsSelectTouched] = useState(false);
 
   const handleFileSelect = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -50,6 +50,7 @@ const CreateBlogForm = ({ categories }: { categories: CategoryTypes[] }) => {
   };
 
   const onSubmit = async (values: FormikValues, formikHelpers: any) => {
+    setIsSelectTouched(false);
     const arrayOfNumberCategories = values.categories.map(
       (category) => category.id
     );
@@ -132,7 +133,8 @@ const CreateBlogForm = ({ categories }: { categories: CategoryTypes[] }) => {
                       name="title"
                       label="სათაური*"
                       placeholder="შეიყვანეთ სათაური"
-                      info="მინიმუმ 4 სიმბოლო"
+                      info="მინიმუმ 2 სიმბოლო"
+                      minTwoCharachters
                     />
                   </div>
                 </div>
@@ -143,7 +145,7 @@ const CreateBlogForm = ({ categories }: { categories: CategoryTypes[] }) => {
                     name="description"
                     label="აღწერა*"
                     placeholder="შეიყვანეთ აღწერა"
-                    info="მინიმუმ 4 სიმბოლო"
+                    info="მინიმუმ 2 სიმბოლო"
                     minRows={5}
                   />
                 </div>
@@ -166,6 +168,8 @@ const CreateBlogForm = ({ categories }: { categories: CategoryTypes[] }) => {
                       label="კატეგორია"
                       placeholder="აირჩიეთ კატეგორია"
                       categories={categories}
+                      isSelectTouched={isSelectTouched}
+                      setIsSelectTouched={setIsSelectTouched}
                     />
                   </div>
                   {/* მეილი */}

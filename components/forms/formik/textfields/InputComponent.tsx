@@ -80,12 +80,13 @@ import Image from "next/image";
 import { InputProps } from "@/types";
 
 const InputComponent: React.FC<InputProps> = (props) => {
-  const { label, name, placeholder, info } = props;
+  const { label, name, placeholder, info, minTwoCharachters } = props;
   const [field, meta] = useField(name);
 
   const hasError =
     (meta.touched && Boolean(meta.error)) ||
-    (field.value.length > 0 && field.value.length < 4);
+    (field.value.length > 0 &&
+      (minTwoCharachters ? field.value.length < 2 : field.value.length < 4));
 
   const isValidEmail = /^[a-zA-Z\d\.-]+@redberry\.ge$/.test(field.value);
 
@@ -108,9 +109,9 @@ const InputComponent: React.FC<InputProps> = (props) => {
         placeholder={placeholder}
         className={`rounded-[12px] mt-[10px] bg-[#FFFFFF] w-full px-4 py-[10px] border-[2px] focus:border-[#5D37F3] outline-none ${
           hasError
-            ? "border border-warning bg-warning-background"
-            : field.value.length >= 4
-            ? "border border-success"
+            ? "border-warning bg-warning-background"
+            : field.value.length >= 2
+            ? "border-success"
             : ""
         }`}
       />

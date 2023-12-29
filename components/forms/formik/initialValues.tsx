@@ -1,6 +1,10 @@
 export const initialValues = {
   image: (typeof window !== "undefined" &&
-    JSON.parse(sessionStorage.getItem("image")!)) || { name: "", url: "" },
+    JSON.parse(sessionStorage.getItem("image")!)) || {
+    name: "",
+    url: "",
+    size: 0,
+  },
   author:
     (typeof window !== "undefined" && sessionStorage.getItem("author")) || "",
   title:

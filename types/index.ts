@@ -51,6 +51,9 @@ export type FormControlProps = {
   minRows?: number;
   setFieldValue?: Function;
   categories?: CategoryTypes[];
+  isSelectTouched?: boolean;
+  setIsSelectTouched?: Dispatch<SetStateAction<boolean>>;
+  minTwoCharachters?: boolean;
 }
 
 export type DatePickerProps =  {
@@ -66,6 +69,7 @@ export type InputProps = {
   placeholder?: string;
   info?: string[] | string;
   minRows?: number;
+  minTwoCharachters?: boolean
 }
 
 export type  SelectComponentProps = {
@@ -74,6 +78,8 @@ export type  SelectComponentProps = {
   placeholder?: string;
   setFieldValue?: Function;
   categories?: CategoryTypes[];
+  isSelectTouched?: boolean;
+  setIsSelectTouched?: Dispatch<SetStateAction<boolean>>;
 }
 
 export type ImageComponentProps = {
@@ -81,6 +87,6 @@ export type ImageComponentProps = {
   handleFileSelect: any;
   setFieldValue: any;
   handleImageRemove: any;
-  name: any;
+  name: string;
   hasError: any;
 }

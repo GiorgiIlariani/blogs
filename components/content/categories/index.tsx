@@ -36,7 +36,7 @@ const CategoriesList = ({
 
   return (
     <div
-      className="max-w-[670px] mx-auto flex items-center gap-[10px] overflow-x-scroll no-scrollbar whitespace-nowrap"
+      className="max-w-[660px] mx-auto flex items-center gap-[10px] overflow-x-scroll no-scrollbar whitespace-nowrap"
       {...events}
       ref={ref}>
       {categories.map(({ title, text_color, id, background_color }, index) => (

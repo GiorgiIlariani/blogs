@@ -8,7 +8,15 @@ import Button from "@/components/UI/Button";
 import { IoIosClose } from "react-icons/io";
 
 const SelectComponent = (props: SelectComponentProps) => {
-  const { name, label, placeholder, setFieldValue, categories } = props;
+  const {
+    name,
+    label,
+    placeholder,
+    setFieldValue,
+    categories,
+    isSelectTouched,
+    setIsSelectTouched,
+  } = props;
 
   const [field] = useField(name);
   const [selectedCategories, setSelectedCategories] = useState<CategoryTypes[]>(
@@ -17,7 +25,6 @@ const SelectComponent = (props: SelectComponentProps) => {
       []
   );
   const [showOptions, setShowOptions] = useState(false);
-  const [isTouched, setIsTouched] = useState(false);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -45,8 +52,6 @@ const SelectComponent = (props: SelectComponentProps) => {
   }, [field.value, name]);
 
   const handleCategories = (category: CategoryTypes) => {
-    console.log(selectedCategories);
-
     const exists = selectedCategories.some(
       (selectedCategory) => selectedCategory.id === category.id
     );
@@ -79,11 +84,11 @@ const SelectComponent = (props: SelectComponentProps) => {
 
     if (!isRemoveIconClicked) {
       setShowOptions((prev) => !prev);
-      setIsTouched(true);
+      setIsSelectTouched!(true);
     }
   };
 
-  const hasError = isTouched && field.value.length === 0;
+  const hasError = isSelectTouched && field.value.length === 0;
   const isValid = field.value.length > 0;
 
   return (
@@ -96,7 +101,7 @@ const SelectComponent = (props: SelectComponentProps) => {
             ? "border-success"
             : hasError
             ? "border-warning bg-warning-background"
-            : isTouched && !isValid && showOptions
+            : isSelectTouched && !isValid && showOptions
             ? "border-[#5D37F3]"
             : ""
         }
