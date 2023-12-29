@@ -10,7 +10,12 @@ import { fetchCategories } from "@/lib/actions/fetchCategories";
 import PaginationComponent from "../shared/PaginationComponent";
 
 const MainContent = ({ page }: { page: number }) => {
-  const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
+  // const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<number[]>(() => {
+    // Retrieve selected categories from sessionStorage on component mount
+    const storedCategories = sessionStorage.getItem("filteredCategories");
+    return storedCategories ? JSON.parse(storedCategories) : [];
+  });
   const [categories, setCategories] = useState<CategoryTypes[]>([]);
   const [blogs, setBlogs] = useState<BlogsTypes[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -45,6 +50,8 @@ const MainContent = ({ page }: { page: number }) => {
     };
     fetchBlogsData();
   }, [selectedCategories, page]);
+
+  console.log(selectedCategories);
 
   return (
     <>

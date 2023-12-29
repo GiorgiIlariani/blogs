@@ -15,15 +15,13 @@ const EachBlog = ({
 }: BlogsTypes) => {
   return (
     <div className="w-[408px] blogsResponsive:w-[350px] flex flex-col gap-4 my-4">
-      <Link href={`/blogDetails/${id}`} className="cursor-pointer">
-        <Image
-          src={image}
-          alt="test img"
-          width={408}
-          height={328}
-          className="object-cover w-[408px] blogsResponsive:w-[350px] h-[328px] blogsResponsive:h-[300px] rounded-[12px]"
-        />
-      </Link>
+      <Image
+        src={image}
+        alt="test img"
+        width={408}
+        height={328}
+        className="object-cover w-[408px] blogsResponsive:w-[350px] h-[328px] blogsResponsive:h-[300px] rounded-[12px]"
+      />
       <div className="w-full flex flex-col gap-4 justify-between">
         <div className="flex flex-col gap-2">
           <h4 className="text-base font-semibold">{author}</h4>
@@ -56,7 +54,7 @@ const EachBlog = ({
           <div className="flex items-center gap-1 cursor-pointer">
             <Link
               href={`/blogDetails/${id}`}
-              className="text-[#5D37F3] text-sm font-medium">
+              className="text-[#5D37F3] text-sm font-medium cursor-pointer">
               სრულად ნახვა
             </Link>
             <Image

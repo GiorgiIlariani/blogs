@@ -1,7 +1,7 @@
 "use client";
 
 import { CategoryTypes } from "@/types";
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useEffect } from "react";
 import Button from "../../UI/Button";
 import { useRef } from "react";
 import { useDraggable } from "react-use-draggable-scroll";
@@ -16,6 +16,14 @@ const CategoriesList = ({
   selectedCategories,
   setSelectedCategories,
 }: CategoriesProps) => {
+  useEffect(() => {
+    // Save selected categories to sessionStorage when they are updated
+    sessionStorage.setItem(
+      "filteredCategories",
+      JSON.stringify(selectedCategories)
+    );
+  }, [selectedCategories]);
+
   const ref =
     useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>;
   const { events } = useDraggable(ref);
