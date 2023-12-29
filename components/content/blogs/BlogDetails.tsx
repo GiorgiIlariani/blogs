@@ -13,7 +13,7 @@ type BlogDetailsProps = {
   email: string;
 };
 
-const BlogDetails: React.FC<BlogDetailsProps> = async ({
+const BlogDetails: React.FC<BlogDetailsProps> = ({
   title,
   description,
   image,

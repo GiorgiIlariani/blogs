@@ -1,6 +1,4 @@
-import BlogDetailsLoading from "@/components/loadings/blogDetailsLoading";
 import Header from "@/components/shared/Header";
-import { Suspense } from "react";
 
 export default function BlogDetailsLayout({
   children,
@@ -10,7 +8,7 @@ export default function BlogDetailsLayout({
   return (
     <main className="bg-[#F3F2FA] min-h-screen">
       <Header />
-      <Suspense fallback={<BlogDetailsLoading />}>{children}</Suspense>
+      {children}
     </main>
   );
 }
