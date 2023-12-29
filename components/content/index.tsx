@@ -13,7 +13,9 @@ const MainContent = ({ page }: { page: number }) => {
   // const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
   const [selectedCategories, setSelectedCategories] = useState<number[]>(() => {
     // Retrieve selected categories from sessionStorage on component mount
-    const storedCategories = sessionStorage.getItem("filteredCategories");
+    const storedCategories =
+      typeof window !== "undefined" &&
+      sessionStorage.getItem("filteredCategories");
     return storedCategories ? JSON.parse(storedCategories) : [];
   });
   const [categories, setCategories] = useState<CategoryTypes[]>([]);
@@ -50,8 +52,6 @@ const MainContent = ({ page }: { page: number }) => {
     };
     fetchBlogsData();
   }, [selectedCategories, page]);
-
-  console.log(selectedCategories);
 
   return (
     <>

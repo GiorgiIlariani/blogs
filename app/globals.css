@@ -2,10 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+/* don't show scrollbar */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
 
+/* swiper */
 .swiper {
   width: 100%;
   height: 100%;
@@ -19,7 +21,6 @@
   align-items: center;
   height: 200px;
 }
-
 
 .image-swiper-btn {
     display: flex;
