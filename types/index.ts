@@ -83,10 +83,10 @@ export type  SelectComponentProps = {
 }
 
 export type ImageComponentProps = {
-  imageTouched: any;
-  handleFileSelect: any;
-  setFieldValue: any;
-  handleImageRemove: any;
+  imageTouched: boolean;
+  handleFileSelect: (e: React.ChangeEvent<HTMLInputElement>, setFieldValue: Function) => void;
+  setFieldValue: Function;
+  handleImageRemove: (setFieldValue: Function) => void;
   name: string;
   hasError: any;
 }

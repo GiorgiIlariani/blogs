@@ -71,6 +71,9 @@ const CreateBlogForm = ({ categories }: { categories: CategoryTypes[] }) => {
       if (response) {
         setOpenModal(true);
         formikHelpers.resetForm();
+        typeof window !== "undefined" && sessionStorage.clear();
+
+        sessionStorage.setItem("isAuthorized", "true");
       }
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -91,7 +94,14 @@ const CreateBlogForm = ({ categories }: { categories: CategoryTypes[] }) => {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmit}>
-        {({ setFieldValue, isValid, values, isSubmitting, errors }) => {
+        {({
+          setFieldValue,
+          isValid,
+          values,
+          isSubmitting,
+          errors,
+          submitForm,
+        }) => {
           const isFormValid = isValid && values.categories.length > 0;
 
           return (
