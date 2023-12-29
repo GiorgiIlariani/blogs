@@ -38,7 +38,7 @@ const MainContent = ({ page }: { page: number }) => {
     const fetchBlogsData = async () => {
       try {
         setIsLoading(true);
-        const data = await fetchBlogs(selectedCategories, page, 6);
+        const data = await fetchBlogs(selectedCategories, page, 9);
         setBlogs(data.blogs);
         setIsNext(data.isNext);
         setAllBlogs(data.allDocument);
@@ -60,11 +60,15 @@ const MainContent = ({ page }: { page: number }) => {
       />
       {isLoading ? (
         <FetchBlogsLoading />
+      ) : blogs.length === 0 ? (
+        <p className="text-center mt-20 font-semibold text-4xl">
+          No blogs to show!
+        </p>
       ) : (
         <>
           <BlogsList filteredBlogs={blogs} />
           {blogs.length > 0 && (
-            <div className="w-full my-10 flex items-center justify-center">
+            <div className="w-full mb-10 mt-16 flex items-center justify-center">
               <PaginationComponent
                 isNext={isNext || false}
                 pageNumber={page || 1}
