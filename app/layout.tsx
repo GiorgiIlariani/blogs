@@ -18,7 +18,7 @@ const Firago = localFont({
       weight: "500",
     },
     {
-      path: "../public/assets/fonts/FiraGO_fonts/Roman/FiraGO-Semibold.ttf",
+      path: "../public/assets/fonts/FiraGO_fonts/Roman/FiraGO-SemiBold.ttf",
       weight: "600",
     },
     {
