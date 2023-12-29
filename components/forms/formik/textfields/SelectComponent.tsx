@@ -94,7 +94,7 @@ const SelectComponent = (props: SelectComponentProps) => {
     <div className="flex flex-col gap-[10px] w-full relative">
       <h3 className="font-semibold text-base">{label}</h3>
       <div
-        className={`w-full h-[44px] rounded-[12px] flex items-center gap-2 overflow-x-hidden overflow-y-hidden text-xs relative px-[10px] cursor-pointer border select-div
+        className={`w-full h-[44px] rounded-[12px] flex items-center overflow-y-hidden text-xs relative cursor-pointer border select-div
         ${
           isValid
             ? "border-success"
@@ -106,29 +106,31 @@ const SelectComponent = (props: SelectComponentProps) => {
         }
         `}
         onClick={handleOptions}>
-        {field.value.map((item: CategoryTypes) => (
-          <Button
-            text={item.title}
-            key={item.id}
-            style={{
-              backgroundColor: item.background_color,
-              color: item.text_color,
-            }}
-            className="h-8 py-[6px] px-3 rounded-[30px] text-nowrap"
-            endDecorator={
-              <div
-                className="text-white text-xl flex items-center justify-center cursor-pointer remove-icon"
-                onClick={() => handleCategoryRemove(item.id)}>
-                <IoIosClose />
-              </div>
-            }
-          />
-        ))}
-        {field.value.length === 0 ? (
-          <p className="text-[#85858D] text-sm">{placeholder}</p>
-        ) : null}
+        <div className="flex items-center gap-2 overflow-x-scroll pl-[10px] no-scrollbar">
+          {field.value.map((item: CategoryTypes) => (
+            <Button
+              text={item.title}
+              key={item.id}
+              style={{
+                backgroundColor: item.background_color,
+                color: item.text_color,
+              }}
+              className="h-8 py-[6px] px-3 rounded-[30px] text-nowrap"
+              endDecorator={
+                <div
+                  className="text-white text-xl flex items-center justify-center cursor-pointer remove-icon"
+                  onClick={() => handleCategoryRemove(item.id)}>
+                  <IoIosClose />
+                </div>
+              }
+            />
+          ))}
+          {field.value.length === 0 ? (
+            <p className="text-[#85858D] text-sm">{placeholder}</p>
+          ) : null}
+        </div>
         <div
-          className={`bg-white h-full ${
+          className={`absolute right-0 bg-white h-full ${
             hasError ? "bg-warning-background" : ""
           } absolute right-0 px-[10px] py-0 flex items-center justify-center`}>
           <IoIosArrowDown className="w-5 h-6 cursor-pointer text-sm" />
